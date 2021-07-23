@@ -38,4 +38,5 @@ public class EffectCamera : MonoBehaviour
     // {
     //     instance.camEffect.SetShake(intense, during);
     // }
+
 }

@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public float PassTime => passTime;
-    private float passTime;
-
     private Text timerText;
 
     private void Start()
@@ -17,8 +14,6 @@ public class Timer : MonoBehaviour
 
     private void Update()
     {
-        passTime += Time.deltaTime;
-
-        timerText.text = PassTime.ToString("F0");
+        timerText.text = GameManager.PassTime.ToString("F0");
     }
 }

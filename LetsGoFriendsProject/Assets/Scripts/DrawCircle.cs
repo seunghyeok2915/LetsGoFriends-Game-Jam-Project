@@ -5,8 +5,11 @@ using UnityEngine;
 public class DrawCircle : MonoBehaviour
 {
     public int segments;
+
     public float xradius;
     public float yradius;
+
+    public float width;
     LineRenderer line;
 
     void Start()
@@ -14,6 +17,7 @@ public class DrawCircle : MonoBehaviour
         line = gameObject.GetComponent<LineRenderer>();
         line.positionCount = (segments + 1);
         line.useWorldSpace = false;
+        line.startWidth = width;
         CreatePoints();
     }
 

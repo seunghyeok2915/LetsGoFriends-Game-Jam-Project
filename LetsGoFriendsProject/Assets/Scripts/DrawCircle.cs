@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class DrawCircle : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class DrawCircle : MonoBehaviour
         line.positionCount = (segments + 1);
         line.useWorldSpace = false;
         line.startWidth = width;
+
 
     }
 
@@ -43,4 +45,6 @@ public class DrawCircle : MonoBehaviour
         }
     }
 }
+
+
 

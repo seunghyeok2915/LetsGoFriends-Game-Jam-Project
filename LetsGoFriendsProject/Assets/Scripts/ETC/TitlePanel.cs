@@ -26,13 +26,12 @@ public class TitlePanel : MonoBehaviour
         SoundManager.Instance.AdjustBGMVolume(1);
 
 
-        SoundManager.Instance.PlayBGMSound("TitleBackGround");
     }
 
     void OnEnable()
     {
 
-        panelImage.rectTransform.DOAnchorPosY(15 ,duration).SetEase(ease).OnComplete(()=>
+        panelImage.rectTransform.DOAnchorPosY(13 ,duration).SetEase(ease).OnComplete(()=>
         {
             FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
             panelBtn.interactable = true;
@@ -43,6 +42,7 @@ public class TitlePanel : MonoBehaviour
 
     public void GameScene()
     {
+        SoundManager.Instance.PlayBGMSound("TitleBackGround");
         mainImage.rectTransform.DOAnchorPosY(-1240,1);
 
     }

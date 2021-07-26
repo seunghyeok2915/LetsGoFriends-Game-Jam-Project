@@ -26,7 +26,7 @@ public class SoundManager : MonoBehaviour
             if (instance == null) // instance 가 비어있다면
             {
                 instance = FindObjectOfType<SoundManager>(); // 찾아준다
-                if (instance == null) // 그래도 없다면 
+                if (instance == null) // 그래도 없다면
                 {
                     instance = new GameObject(typeof(SoundManager).ToString()).AddComponent<SoundManager>(); // 만든다
                 }

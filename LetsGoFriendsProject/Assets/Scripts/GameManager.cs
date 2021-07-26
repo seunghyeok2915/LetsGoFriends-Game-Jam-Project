@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
-    public static float PassTime => passTime;
-    private static float passTime;
+    public float PassTime => passTime;
+    private float passTime;
 
     public List<Transform> spawnPointList = new List<Transform>();
     public List<string> obstacleList;
@@ -13,6 +14,46 @@ public class GameManager : MonoBehaviour
     public PlayerMove playerMove;
 
     private float radius;
+
+    private static GameManager instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if (instance == null) // instance 가 비어있다면
+            {
+                instance = FindObjectOfType<GameManager>(); // 찾아준다
+                if (instance == null) // 그래도 없다면 
+                {
+                    instance = new GameObject(typeof(GameManager).ToString()).AddComponent<GameManager>(); // 만든다
+                }
+            }
+
+            return instance;
+        }
+    }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this as GameManager;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        DontDestroyOnLoad(this);
+    }
+
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = default;
+        }
+    }
 
     void Start()
     {
@@ -31,7 +72,7 @@ public class GameManager : MonoBehaviour
         passTime += Time.deltaTime;
         if (PassTime > 10)
             radius = 3f;
-        playerMove.radius = Mathf.Lerp(playerMove.radius, radius, Time.deltaTime);
+        DOTween.To(() => playerMove.radius, x => playerMove.radius = x, radius, 3f);
     }
 
     public IEnumerator SpawnObstacles()

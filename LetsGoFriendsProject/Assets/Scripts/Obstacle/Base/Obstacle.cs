@@ -11,7 +11,6 @@ public enum MovingType
 
 public class Obstacle : MonoBehaviour
 {
-    private MovingScript movingScript;
     private MovingType movingType;
     private bool onScreen;
 
@@ -64,12 +63,10 @@ public class Obstacle : MonoBehaviour
         {
             case MovingType.Straight:
                 MoveStraight ms = gameObject.AddComponent<MoveStraight>();
-                movingScript = ms;
                 ms.SetMove(startPos, endPos, speed);
                 break;
             case MovingType.Curve:
                 MoveCurve mc = gameObject.AddComponent<MoveCurve>();
-                movingScript = mc;
                 mc.SetMove(startPos, endPos, speed, movingDepth);
                 break;
             default:
@@ -86,7 +83,12 @@ public class Obstacle : MonoBehaviour
 
     public virtual void ActiveFalse()
     {
-        Destroy(movingScript);
+        var ms = GetComponents<MovingScript>();
+        foreach (var item in ms)
+        {
+            Destroy(item);
+        }
+
         trailRenderer.material.DOColor(new Color(0, 0, 0, 0), 0.3f);
         spriteRenderer.DOColor(new Color(0, 0, 0, 0), 0.3f).OnComplete(() =>
         {

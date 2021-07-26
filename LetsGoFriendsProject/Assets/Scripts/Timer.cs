@@ -8,7 +8,12 @@ public class Timer : MonoBehaviour
     public float PassTime => passTime;
     private float passTime;
 
-    public Text timerText;
+    private Text timerText;
+
+    private void Start()
+    {
+        timerText = Utils.Bind<Text>(gameObject, "");
+    }
 
     private void Update()
     {

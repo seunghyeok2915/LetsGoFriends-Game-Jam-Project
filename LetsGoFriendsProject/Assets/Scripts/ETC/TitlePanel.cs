@@ -25,8 +25,8 @@ public class TitlePanel : MonoBehaviour
         SoundManager.Instance.AdjustFxVoulme(1);
         SoundManager.Instance.AdjustBGMVolume(1);
 
-        SoundManager.Instance.PlayBGMSound("TitleBackGround");
 
+        SoundManager.Instance.PlayBGMSound("TitleBackGround");
     }
 
     void OnEnable()
@@ -43,10 +43,6 @@ public class TitlePanel : MonoBehaviour
 
     public void GameScene()
     {
-
-
-       // SoundManager.Instance.PlayFXSound("TitleClick");
-
         mainImage.rectTransform.DOAnchorPosY(-1240,1);
 
     }

@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public float PassTime => passTime;
     private float passTime;
 
+    public float spawnDelay;
+
     public List<Transform> spawnPointList = new List<Transform>();
     public List<string> obstacleList;
 
@@ -92,7 +94,7 @@ public class GameManager : MonoBehaviour
                 default:
                     break;
             }
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(spawnDelay);
         }
     }
 

@@ -16,6 +16,14 @@ public class EffectCamera : MonoBehaviour
         noise = cmVcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
+    public int intense;
+    public int during;
+
+    private void Start()
+    {
+        SetShake(intense, during);
+    }
+
     public void SetShake(float intense, float during)
     {
         noise.m_AmplitudeGain = intense;

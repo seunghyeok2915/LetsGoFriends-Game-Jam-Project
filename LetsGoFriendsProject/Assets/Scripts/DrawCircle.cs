@@ -6,8 +6,7 @@ public class DrawCircle : MonoBehaviour
 {
     public int segments;
 
-    public float xradius;
-    public float yradius;
+    public PlayerMove playerMove;
 
     public float width;
     LineRenderer line;
@@ -18,6 +17,11 @@ public class DrawCircle : MonoBehaviour
         line.positionCount = (segments + 1);
         line.useWorldSpace = false;
         line.startWidth = width;
+
+    }
+
+    private void Update()
+    {
         CreatePoints();
     }
 
@@ -31,8 +35,8 @@ public class DrawCircle : MonoBehaviour
 
         for (int i = 0; i < (segments + 1); i++)
         {
-            x = Mathf.Cos(Mathf.Deg2Rad * angle) * xradius;
-            y = Mathf.Sin(Mathf.Deg2Rad * angle) * xradius;
+            x = Mathf.Cos(Mathf.Deg2Rad * angle) * playerMove.radius;
+            y = Mathf.Sin(Mathf.Deg2Rad * angle) * playerMove.radius;
 
             line.SetPosition(i, new Vector3(x, y, z));
             angle += (360f / segments);

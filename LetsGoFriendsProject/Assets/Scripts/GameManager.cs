@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static float PassTime => passTime;
+    private static float passTime;
+
     public List<Transform> spawnPointList = new List<Transform>();
     public List<string> obstacleList;
 
+    public PlayerMove playerMove;
+
+    private float radius;
+
     void Start()
     {
+
         PoolManager.CreatePool<Obstacle>("DamageObstacle", gameObject, 5);
         PoolManager.CreatePool<Obstacle>("BounceObstacle", gameObject, 5);
         PoolManager.CreatePool<Obstacle>("HiderObstacle", gameObject, 5);
+
         StartCoroutine(SpawnObstacles());
+        passTime = 0f;
+        radius = playerMove.radius;
+    }
+
+    private void Update()
+    {
+        passTime += Time.deltaTime;
+        if (PassTime > 10)
+            radius = 3f;
+        playerMove.radius = Mathf.Lerp(playerMove.radius, radius, Time.deltaTime);
     }
 
     public IEnumerator SpawnObstacles()
@@ -32,7 +51,7 @@ public class GameManager : MonoBehaviour
                 default:
                     break;
             }
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(2f);
         }
     }
 

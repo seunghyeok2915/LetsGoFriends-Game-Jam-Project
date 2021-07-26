@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2931102713481960257}
   - component: {fileID: 2931102713481960262}
   - component: {fileID: 2931102713481960263}
-  - component: {fileID: -752642840549815042}
+  - component: {fileID: -1035224030768388484}
   m_Layer: 0
-  m_Name: CircleObstacle
+  m_Name: HiderObstacle
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +100,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &-752642840549815042
+--- !u!114 &-1035224030768388484
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,7 +109,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2931102713481960260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60364d0a8c160644e885dca2781e7ee6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3872c08414afb984698eb911cb315465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingWidth: 10

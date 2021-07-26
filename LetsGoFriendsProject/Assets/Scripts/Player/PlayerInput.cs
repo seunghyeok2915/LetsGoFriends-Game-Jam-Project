@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class PlayerInput : MonoBehaviour
 {
     public PlayerMove playerMove;
+    public PlayerParry playerParry;
 
     public UnityEvent onClickMouseLeft = new UnityEvent();
 
@@ -17,6 +18,15 @@ public class PlayerInput : MonoBehaviour
             if (playerMove == null)
             {
                 Debug.LogWarning("PlayerMove 가 없습니다.");
+            }
+        }
+
+        if (playerParry == null)
+        {
+            playerParry = GetComponent<PlayerParry>();
+            if (playerParry == null)
+            {
+                Debug.LogWarning("playerParry 가 없습니다.");
             }
         }
     }
@@ -31,6 +41,16 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             onClickMouseLeft?.Invoke();
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            playerParry.OnSpaceBtn();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            playerParry.OnSpaceBtnUp();
         }
     }
 

@@ -1,0 +1,60 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+
+public class PoolManager
+{
+    public static Dictionary<string, object> pool = new Dictionary<string, object>();
+    public static Dictionary<string, GameObject> prefabDictionary = new Dictionary<string, GameObject>();
+
+
+    public static void CreatePool<T>(string name, Transform parent, int count = 5) where T : MonoBehaviour
+    {
+        Queue<T> q = new Queue<T>();
+        T prefab = Resources.Load<T>("Prefabs/" + name);
+
+        for (int i = 0; i < count; i++)
+        {
+            GameObject g = GameObject.Instantiate(prefab.gameObject, parent);
+
+            g.SetActive(false);
+            q.Enqueue(g.GetComponent<T>());
+        }
+
+
+        pool.Add(name, q);
+        prefabDictionary.Add(name, prefab.gameObject);
+    }
+
+    public static T GetItem<T>(string name) where T : MonoBehaviour
+    {
+        T item = null;
+        if (pool.ContainsKey(name))
+        {
+            Queue<T> q = (Queue<T>)pool[name];
+            T firstItem = q.Peek();
+            Debug.Log(firstItem.gameObject.activeSelf);
+
+            if (firstItem.gameObject.activeSelf)
+            {  //첫번째 아이템이 이미 사용중이라면
+                GameObject prefab = prefabDictionary[name];
+                GameObject g = GameObject.Instantiate(prefab, firstItem.transform.parent);
+                item = g.GetComponent<T>();
+            }
+            else
+            {
+                item = q.Dequeue();
+                item.gameObject.SetActive(true);
+            }
+            IPoolable ipool = item.GetComponent<IPoolable>();
+            if (ipool != null)
+            {
+                ipool.OnPool();
+            }
+            q.Enqueue(item);
+
+        }
+        return item;
+    }
+}

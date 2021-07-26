@@ -7,7 +7,7 @@ public class Test : MonoBehaviour
 
     void Start()
     {
-     //  FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
+      FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
     }
 
 

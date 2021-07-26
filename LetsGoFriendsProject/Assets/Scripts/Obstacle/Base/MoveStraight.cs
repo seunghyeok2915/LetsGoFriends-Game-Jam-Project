@@ -2,18 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveStraight : MonoBehaviour
+public class MoveStraight : MovingScript
 {
-    private Vector2 startPos;
-    private Vector2 endPos;
-
-    private float speed;
-
     public void SetMove(Vector2 startPos, Vector2 endPos, float speed)
     {
-        this.startPos = startPos;
-        this.endPos = endPos;
-        this.speed = speed;
+        base.startPos = startPos;
+        base.endPos = endPos;
+        base.speed = speed;
 
         transform.position = startPos;
     }
@@ -25,7 +20,7 @@ public class MoveStraight : MonoBehaviour
 
     public void MoveStaright()
     {
-        Vector2 dir = new Vector2(transform.position.x, transform.position.y) - endPos;
+        Vector2 dir = endPos - new Vector2(transform.position.x, transform.position.y);
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = q;

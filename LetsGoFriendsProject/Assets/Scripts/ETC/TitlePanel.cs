@@ -15,17 +15,36 @@ public class TitlePanel : MonoBehaviour
     public Ease ease;
     public int duration;
 
-
+    public Button panelBtn;
 
     void Start()
     {
-        panelImage.rectTransform.DOAnchorPosY(15 ,duration).SetEase(ease).OnComplete(()=>FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position)));
+        SoundManager.Instance.AdjustMasterVolume(1);
+        SoundManager.Instance.AdjustFxVoulme(1);
+        SoundManager.Instance.AdjustBGMVolume(1);
+
+        SoundManager.Instance.PlayBGMSound("TitleBackGround");
+
+        panelImage.rectTransform.DOAnchorPosY(15 ,duration).SetEase(ease).OnComplete(()=>
+        {
+            FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
+            panelBtn.interactable = true;
+             SoundManager.Instance.PlayFXSound("TitleClick");
+        });
+
+    }
+
+    void OnEnable()
+    {
     }
 
 
     public void GameScene()
     {
-        audioSource.Play();
+
+
+       // SoundManager.Instance.PlayFXSound("TitleClick");
+
         mainImage.rectTransform.DOAnchorPosY(-1240,1);
 
     }

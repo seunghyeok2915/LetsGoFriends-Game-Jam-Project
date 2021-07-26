@@ -13,4 +13,11 @@ public class MovingScript : MonoBehaviour
     {
         this.speed = speed;
     }
+
+    public void SetDirection(Vector2 pos)
+    {
+        MoveDirection md = gameObject.AddComponent<MoveDirection>();
+        md.SetDir(pos, speed * 5);
+        Destroy(this);
+    }
 }

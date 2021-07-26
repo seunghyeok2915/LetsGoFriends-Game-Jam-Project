@@ -24,6 +24,7 @@ public class MoveStraight : MovingScript
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = q;
+
         transform.position = Vector2.MoveTowards(transform.position, endPos, Time.deltaTime * speed);
     }
 }

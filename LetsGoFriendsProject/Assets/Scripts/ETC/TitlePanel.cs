@@ -17,6 +17,8 @@ public class TitlePanel : MonoBehaviour
 
     public Button panelBtn;
 
+
+
     void Start()
     {
         SoundManager.Instance.AdjustMasterVolume(1);
@@ -25,17 +27,17 @@ public class TitlePanel : MonoBehaviour
 
         SoundManager.Instance.PlayBGMSound("TitleBackGround");
 
+    }
+
+    void OnEnable()
+    {
+
         panelImage.rectTransform.DOAnchorPosY(15 ,duration).SetEase(ease).OnComplete(()=>
         {
             FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
             panelBtn.interactable = true;
              SoundManager.Instance.PlayFXSound("TitleClick");
         });
-
-    }
-
-    void OnEnable()
-    {
     }
 
 

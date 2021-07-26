@@ -10,45 +10,26 @@ public enum MovingType
 
 public class Obstacle : MonoBehaviour
 {
-    private Vector2 startPos;
-    private Vector2 endPos;
-
-    private float speed;
-
     private MovingType movingType;
 
-    public void SetMovingEntity(Vector2 startPos, Vector2 endPos, float speed)
+    public void SetObstacle(MovingType movingType, Vector2 startPos, Vector2 endPos, float speed, float movingDepth = 2f)
     {
-        this.startPos = startPos;
-        this.endPos = endPos;
-        this.speed = speed;
-
-        transform.position = startPos;
-    }
-
-    private void Update()
-    {
-        Move();
-    }
-
-    public void Move()
-    {
+        this.movingType = movingType;
         switch (movingType)
         {
             case MovingType.Straight:
-                MoveStaright();
+                MoveStraight ms = gameObject.AddComponent<MoveStraight>();
+                ms.SetMove(startPos, endPos, speed);
                 break;
             case MovingType.Curve:
+                MoveCurve mc = gameObject.AddComponent<MoveCurve>();
+                mc.SetMove(startPos, endPos, speed, movingDepth);
                 break;
             default:
                 break;
         }
     }
 
-    public void MoveStaright()
-    {
-        transform.position = Vector2.MoveTowards(transform.position, endPos, Time.deltaTime * speed);
-    }
 
     public virtual void OnEnterPlayer(GameObject player) { }
 

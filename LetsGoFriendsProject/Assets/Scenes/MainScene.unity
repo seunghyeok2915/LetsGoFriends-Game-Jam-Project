@@ -538,6 +538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnDelay: 1
+  phase: 1
   spawnPointList:
   - {fileID: 14144456}
   - {fileID: 1435525569}
@@ -577,9 +578,13 @@ MonoBehaviour:
   - HiderObstacle
   - FrozenObstacle
   playerMove: {fileID: 1574923318}
-  cinemachine: {fileID: 0}
   camEffect: {fileID: 1413204872}
+  virtualCamera: {fileID: 1413204874}
   rippleEffect: {fileID: 1355322305}
+  phaseTime:
+  - 10
+  - 25
+  - 50
 --- !u!4 &283071099
 Transform:
   m_ObjectHideFlags: 0

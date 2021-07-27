@@ -21,10 +21,11 @@ public class GameManager : MonoBehaviour
     private float radius;
     private bool isStart;
 
-    public CinemachineTargetGroup cinemachine;
-    public EffectCamera camEffect;
 
+    public EffectCamera camEffect;
+    public CinemachineVirtualCamera virtualCamera;
     public RippleEffect rippleEffect;
+
 
     private int hiderStack = 0;
     private int frozenStack = 0;
@@ -153,15 +154,7 @@ public class GameManager : MonoBehaviour
         PoolManager.GetItem<Obstacle>(name).SetObstacle(movingType, spawnPointList[randIndex].position, new Vector2(0, 0), speed, movingDepth);
     }
 
-    public static void CamShake(float intense, float during)
-    {
-        instance.camEffect.SetShake(intense, during);
-    }
 
-    public void RippleEffects()
-    {
-        rippleEffect.Emit(Camera.main.WorldToViewportPoint(transform.position));
-    }
 
     public void SpawnMobPhase1()
     {
@@ -225,6 +218,26 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+
+        public static void CamShake(float intense, float during)
+    {
+        instance.camEffect.SetShake(intense, during);
+    }
+
+    public void RippleEffects()
+    {
+        rippleEffect.Emit(Camera.main.WorldToViewportPoint(transform.position));
+    }
+
+    public void CamZoomInOut()
+    {
+
+        DOTween.To(()=> virtualCamera.m_Lens.OrthographicSize,value=> virtualCamera.m_Lens.OrthographicSize = value, 4.7f,0).OnComplete(() =>
+        {
+            DOTween.To(() => virtualCamera.m_Lens.OrthographicSize, value => virtualCamera.m_Lens.OrthographicSize = value, 5 , 0.1f );
+        });
     }
 
 }

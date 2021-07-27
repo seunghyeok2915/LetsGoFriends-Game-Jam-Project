@@ -6,6 +6,7 @@ public class BounceObstacle : Obstacle
 {
     private PlayerMove playerMove;
 
+
     public override void OnEnterPlayer(GameObject player)
     {
         if (playerMove == null)

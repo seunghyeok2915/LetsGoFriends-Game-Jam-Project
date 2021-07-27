@@ -234,10 +234,10 @@ public class GameManager : MonoBehaviour
     public void CamZoomInOut()
     {
 
-        DOTween.To(() => virtualCamera.m_Lens.OrthographicSize, value => virtualCamera.m_Lens.OrthographicSize = value, 8f, 0).OnComplete(() =>
-            {
-                DOTween.To(() => virtualCamera.m_Lens.OrthographicSize, value => virtualCamera.m_Lens.OrthographicSize = value, 8.3f, 0.2f);
-            });
+        DOTween.To(()=> virtualCamera.m_Lens.OrthographicSize,value=> virtualCamera.m_Lens.OrthographicSize = value, 8f,0).OnComplete(() =>
+        {
+            DOTween.To(() => virtualCamera.m_Lens.OrthographicSize, value => virtualCamera.m_Lens.OrthographicSize = value, 8.3f , 0.2f );
+        });
     }
 
 }

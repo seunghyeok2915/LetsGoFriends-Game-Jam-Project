@@ -50,6 +50,7 @@ public class PlayerParry : MonoBehaviour
                     ms.gameObject.AddComponent<ReflectObstacle>();
 
                     GameManager.Instance.RippleEffects();
+                     SoundManager.Instance.PlayFXSound("TitleClick");
                 }
             }
         }

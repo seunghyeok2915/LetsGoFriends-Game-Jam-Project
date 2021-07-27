@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,11 @@ public class GameManager : MonoBehaviour
     private float radius;
     private bool isStart;
 
+    public CinemachineTargetGroup cinemachine;
+    public EffectCamera camEffect;
+
+    public RippleEffect rippleEffect;
+
     private static GameManager instance;
     public static GameManager Instance
     {
@@ -26,7 +32,7 @@ public class GameManager : MonoBehaviour
             if (instance == null) // instance 가 비어있다면
             {
                 instance = FindObjectOfType<GameManager>(); // 찾아준다
-                if (instance == null) // 그래도 없다면 
+                if (instance == null) // 그래도 없다면
                 {
                     instance = new GameObject(typeof(GameManager).ToString()).AddComponent<GameManager>(); // 만든다
                 }
@@ -112,4 +118,15 @@ public class GameManager : MonoBehaviour
         int randIndex = Random.Range(0, spawnPointList.Count);
         PoolManager.GetItem<Obstacle>(name).SetObstacle(movingType, spawnPointList[randIndex].position, new Vector2(0, 0), speed);
     }
+
+    public static void CamShake(float intense, float during)
+    {
+        instance.camEffect.SetShake(intense, during);
+    }
+
+    public void rippleEffects()
+    {
+        rippleEffect.Emit(Camera.main.WorldToViewportPoint(transform.position));
+    }
+
 }

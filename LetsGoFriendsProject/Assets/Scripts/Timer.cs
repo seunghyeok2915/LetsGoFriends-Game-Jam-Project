@@ -15,5 +15,7 @@ public class Timer : MonoBehaviour
     private void Update()
     {
         timerText.text = GameManager.Instance.PassTime.ToString("F0");
+        if (GameManager.Instance.PassTime < 1)
+            timerText.text = "";
     }
 }

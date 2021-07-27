@@ -17,6 +17,8 @@ public class Obstacle : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
     protected TrailRenderer trailRenderer;
 
+    private Color oriColor;
+
     private void Start()
     {
         if (spriteRenderer == null)
@@ -58,6 +60,11 @@ public class Obstacle : MonoBehaviour
             }
         }
 
+        if (spriteRenderer.color != new Color(0, 0, 0, 0))
+        {
+            oriColor = spriteRenderer.color;
+        }
+
         this.movingType = movingType;
         switch (movingType)
         {
@@ -75,8 +82,8 @@ public class Obstacle : MonoBehaviour
 
         onScreen = false;
 
-        spriteRenderer.color = new Color(1, 1, 1, 1);
-        trailRenderer.material.color = new Color(1, 1, 1, 1);
+        spriteRenderer.color = oriColor;
+        trailRenderer.material.color = oriColor;
 
         Invoke("ActiveFalse", 10f);
     }
@@ -88,6 +95,8 @@ public class Obstacle : MonoBehaviour
         {
             Destroy(item);
         }
+
+        var ro = GetComponents<ReflectObstacle>();
 
         trailRenderer.material.DOColor(new Color(0, 0, 0, 0), 0.3f);
         spriteRenderer.DOColor(new Color(0, 0, 0, 0), 0.3f).OnComplete(() =>

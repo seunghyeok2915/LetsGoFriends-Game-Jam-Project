@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public PlayerMove playerMove;
 
     private float radius;
+    private bool isStart;
 
     private static GameManager instance;
     public static GameManager Instance
@@ -57,20 +58,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void StartGame()
+    {
+        SoundManager.Instance.PlayBGMSound("TitleBackGround");
+        passTime = 0f;
+        radius = playerMove.radius;
+        StartCoroutine(SpawnObstacles());
+        isStart = true;
+    }
+
     void Start()
     {
-
         PoolManager.CreatePool<Obstacle>("DamageObstacle", gameObject, 5);
         PoolManager.CreatePool<Obstacle>("BounceObstacle", gameObject, 5);
         PoolManager.CreatePool<Obstacle>("HiderObstacle", gameObject, 5);
-
-        StartCoroutine(SpawnObstacles());
-        passTime = 0f;
-        radius = playerMove.radius;
     }
 
     private void Update()
     {
+        if (!isStart) return;
+
         passTime += Time.deltaTime;
         if (PassTime > 10)
             radius = 3f;

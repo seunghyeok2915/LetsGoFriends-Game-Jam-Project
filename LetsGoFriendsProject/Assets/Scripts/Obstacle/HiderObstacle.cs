@@ -25,7 +25,7 @@ public class HiderObstacle : Obstacle
             yield return new WaitForSeconds(0.05f);
             spriteRenderer.DOColor(new Color(0, 0, 0, 0), 0.05f);
             trailRenderer.material.DOColor(new Color(0, 0, 0, 0), 0.05f);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.3f);
             trailRenderer.material.DOColor(oriColor, 0.4f);
             spriteRenderer.DOColor(oriColor, 0.4f);
             yield return new WaitForSeconds(1f);

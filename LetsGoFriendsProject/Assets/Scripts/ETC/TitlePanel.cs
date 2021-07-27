@@ -31,20 +31,19 @@ public class TitlePanel : MonoBehaviour
     void OnEnable()
     {
 
-        panelImage.rectTransform.DOAnchorPosY(13 ,duration).SetEase(ease).OnComplete(()=>
+        panelImage.rectTransform.DOAnchorPosY(13, duration).SetEase(ease).OnComplete(() =>
         {
             FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
             panelBtn.interactable = true;
-             SoundManager.Instance.PlayFXSound("TitleClick");
+            SoundManager.Instance.PlayFXSound("TitleClick");
         });
     }
 
 
     public void GameScene()
     {
-        SoundManager.Instance.PlayBGMSound("TitleBackGround");
-        mainImage.rectTransform.DOAnchorPosY(-1240,1);
-
+        mainImage.rectTransform.DOAnchorPosY(-1240, 1);
+        GameManager.Instance.StartGame();
     }
 
 }

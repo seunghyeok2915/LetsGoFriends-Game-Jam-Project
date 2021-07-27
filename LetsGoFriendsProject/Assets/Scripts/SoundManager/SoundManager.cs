@@ -162,7 +162,7 @@ public class SoundManager : MonoBehaviour
         PlayFXSound(name);
     }
 
-    public void PauseBGM(string tag)
+    public void PauseBGM()
     {
 
         bgmAudioSourece.Pause();
@@ -170,7 +170,7 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    public void ResumeBGM(string tag)
+    public void ResumeBGM()
     {
         bgmAudioSourece.UnPause();
     }

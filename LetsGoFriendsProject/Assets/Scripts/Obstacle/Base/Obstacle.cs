@@ -85,6 +85,8 @@ public class Obstacle : MonoBehaviour
         spriteRenderer.color = oriColor;
         trailRenderer.material.color = oriColor;
 
+        trailRenderer.Clear();
+
         Invoke("ActiveFalse", 10f);
     }
 

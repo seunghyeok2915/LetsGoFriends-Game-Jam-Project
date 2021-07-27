@@ -665,11 +665,12 @@ MonoBehaviour:
   camEffect: {fileID: 1413204872}
   virtualCamera: {fileID: 1413204874}
   rippleEffect: {fileID: 1355322305}
-  drawEffectCircle: {fileID: 0}
+  drawEffectCircle: {fileID: 283071100}
   phaseTime:
   - 10
   - 25
   - 50
+  - 75
 --- !u!4 &283071099
 Transform:
   m_ObjectHideFlags: 0
@@ -2560,7 +2561,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8.00732
+  orthographic size: 8.017491
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2853,7 +2854,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 8.00732
+    OrthographicSize: 8.017491
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0

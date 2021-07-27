@@ -221,7 +221,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-        public static void CamShake(float intense, float during)
+    public static void CamShake(float intense, float during)
     {
         instance.camEffect.SetShake(intense, during);
     }

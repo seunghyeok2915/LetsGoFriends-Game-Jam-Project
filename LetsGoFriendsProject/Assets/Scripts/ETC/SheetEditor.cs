@@ -5,6 +5,7 @@ using System.IO;
 
 public class SheetEditor : MonoBehaviour
 {
+    public bool isRecord = false;
     public List<float> noteList = new List<float>();
 
     private AudioSource music;
@@ -50,32 +51,42 @@ public class SheetEditor : MonoBehaviour
         music.Play();
     }
 
+    public void EffectStart()
+    {
+        isRecord = false;
+        isPlay = true;
+    }
+
     void Update()
     {
         if (isPlay)
         {
             time += Time.deltaTime;
 
-            if (Input.GetKeyDown(KeyCode.F))
+            if (isRecord)
             {
-                noteList.Add(time);
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    noteList.Add(time);
 
-                string jsonString = JsonUtility.ToJson(this); // jsonString에 통으로 저장됌
+                    string jsonString = JsonUtility.ToJson(this); // jsonString에 통으로 저장됌
 
-                StreamWriter sw = new StreamWriter(getFilePath(saveFileName));
+                    StreamWriter sw = new StreamWriter(getFilePath(saveFileName));
 
-                sw.WriteLine(jsonString);
-                sw.Close();
+                    sw.WriteLine(jsonString);
+                    sw.Close();
+                }
             }
-        }
 
+            if (noteList.Count <= 0) return;
 
-        if(noteList.Count <= 0 ) return;
+            if (time >= noteList[0])
+            {
+                Debug.Log(time);
+                noteList.RemoveAt(0);
+                CameraMove();
+            }
 
-        if(time >= noteList[0])
-        {
-            Debug.Log(time);
-            noteList.RemoveAt(0);
         }
     }
 
@@ -84,5 +95,10 @@ public class SheetEditor : MonoBehaviour
     void SaveObject()
     {
         noteList.Add(music.time);
+    }
+
+    public void CameraMove()
+    {
+        //GameManager.Instance.RippleEffects();
     }
 }

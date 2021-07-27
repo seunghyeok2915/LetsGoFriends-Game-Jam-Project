@@ -162,4 +162,17 @@ public class SoundManager : MonoBehaviour
         PlayFXSound(name);
     }
 
+    public void PauseBGM(string tag)
+    {
+
+        bgmAudioSourece.Pause();
+
+    }
+
+
+    public void ResumeBGM(string tag)
+    {
+        bgmAudioSourece.UnPause();
+    }
+
 }

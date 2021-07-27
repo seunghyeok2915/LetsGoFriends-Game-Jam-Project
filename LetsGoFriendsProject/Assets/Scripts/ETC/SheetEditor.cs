@@ -86,7 +86,7 @@ public class SheetEditor : MonoBehaviour
 
                 if (time >= noteList[0])
                 {
-                    Debug.Log(time);
+                  //  Debug.Log(time);
                     noteList.RemoveAt(0);
                     CameraMove();
                 }

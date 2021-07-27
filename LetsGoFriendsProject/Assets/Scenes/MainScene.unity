@@ -1749,6 +1749,10 @@ PrefabInstance:
       propertyPath: maxRadius
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8012375865625805121, guid: d6c1b25f983a1af43a90d2b277ac5eaf, type: 3}
+      propertyPath: rainObject
+      value: 
+      objectReference: {fileID: 608304616}
     - target: {fileID: 8012375865625805124, guid: d6c1b25f983a1af43a90d2b277ac5eaf, type: 3}
       propertyPath: m_RootOrder
       value: 0

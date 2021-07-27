@@ -15,7 +15,7 @@ public class RainBowEffect : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            transform.GetChild(i).GetComponent<SpriteRenderer>().DOFade(0,1);
+            transform.GetChild(i).GetComponent<SpriteRenderer>().DOFade(0,1).OnComplete(() => this.gameObject.SetActive(false));
            // transform.GetChild(i).transform.DOShakePosition(1,1.2f);
         }
     }

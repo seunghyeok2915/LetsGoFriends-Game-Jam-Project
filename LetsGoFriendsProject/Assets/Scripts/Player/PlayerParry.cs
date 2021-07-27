@@ -9,7 +9,7 @@ public class PlayerParry : MonoBehaviour
 
     public float radiusSpeed;
     public LayerMask obstacleLayer;
-
+    public GameObject rainObject;
     private LineRenderer lineRenderer;
 
     private void Start()
@@ -31,8 +31,8 @@ public class PlayerParry : MonoBehaviour
 
     public void OnSpaceBtn()
     {
+        int countMs = 0;
         RaycastHit2D[] colls = Physics2D.CircleCastAll(transform.position, radius, Vector2.zero, obstacleLayer);
-
         foreach (var item in colls)
         {
             if (item.collider.CompareTag("Obstacle"))
@@ -42,6 +42,8 @@ public class PlayerParry : MonoBehaviour
 
                 if (ms != null)
                 {
+                    countMs++;
+
                     Vector2 inNormal = Vector3.Normalize(transform.position - item.collider.transform.position);
                     Vector2 bounceVector = Vector3.Reflect(item.normal, inNormal);
                     bounceVector = bounceVector.normalized;
@@ -49,14 +51,21 @@ public class PlayerParry : MonoBehaviour
                     ms.SetDirection(bounceVector);
                     ms.gameObject.AddComponent<ReflectObstacle>();
 
+
+
                     GameManager.Instance.RippleEffects();
                      SoundManager.Instance.PlayFXSound("TitleClick");
                 }
             }
         }
+        if(countMs >= 2)
+        {
+            rainObject.SetActive(true);
+        }
 
         radius = 0;
         CreatePoints();
+
     }
 
     public void OnSpaceBtnUp()

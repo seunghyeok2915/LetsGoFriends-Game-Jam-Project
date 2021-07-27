@@ -45,7 +45,7 @@ public class SheetEditor : MonoBehaviour
 
     string getFilePath(string fileName)
     {
-        return Application.dataPath + "/" + fileName;
+        return Application.streamingAssetsPath + "/" + fileName;
     }
 
     public void Play()

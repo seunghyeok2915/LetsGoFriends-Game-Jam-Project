@@ -9,7 +9,6 @@ public class TitlePanel : MonoBehaviour
 {
     public Image panelImage;
     public Image mainImage;
-    public Text mouseTxt;
     public AudioSource audioSource;
     public Button button;
 

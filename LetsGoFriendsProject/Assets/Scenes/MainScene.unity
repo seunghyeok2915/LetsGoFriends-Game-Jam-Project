@@ -575,6 +575,7 @@ MonoBehaviour:
   - DamageObstacle
   - BounceObstacle
   - HiderObstacle
+  - FrozenObstacle
   playerMove: {fileID: 1574923318}
 --- !u!4 &283071099
 Transform:

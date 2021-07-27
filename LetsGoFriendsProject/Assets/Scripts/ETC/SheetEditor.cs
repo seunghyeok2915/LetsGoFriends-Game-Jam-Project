@@ -22,7 +22,7 @@ public class SheetEditor : MonoBehaviour
 
     void Start()
     {
-        if (isRecord) noteList.Clear();
+        //if (isRecord) noteList.Clear();
 
         string fileStr = getFilePath(saveFileName);
         if (File.Exists(fileStr)) // 현재 이 경로에 세이브 파일이 존재하냐

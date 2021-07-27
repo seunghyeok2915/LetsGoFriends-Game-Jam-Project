@@ -84,11 +84,18 @@ public class Obstacle : MonoBehaviour
 
         trailRenderer.Clear();
 
-        Invoke("ActiveFalse", 20f);
+        StartCoroutine(ActiveFalseCour());
+    }
+
+    private IEnumerator ActiveFalseCour()
+    {
+        yield return new WaitForSeconds(20f);
+        ActiveFalse();
     }
 
     public virtual void ActiveFalse()
     {
+        StopCoroutine(ActiveFalseCour());
         var ms = GetComponents<MovingScript>();
         foreach (var item in ms)
         {

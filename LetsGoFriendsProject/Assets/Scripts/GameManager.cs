@@ -236,7 +236,7 @@ public class GameManager : MonoBehaviour
 
         DOTween.To(()=> virtualCamera.m_Lens.OrthographicSize,value=> virtualCamera.m_Lens.OrthographicSize = value, 4.7f,0).OnComplete(() =>
         {
-            DOTween.To(() => virtualCamera.m_Lens.OrthographicSize, value => virtualCamera.m_Lens.OrthographicSize = value, 5 , 0.1f );
+            DOTween.To(() => virtualCamera.m_Lens.OrthographicSize, value => virtualCamera.m_Lens.OrthographicSize = value, 5 , 0.2f );
         });
     }
 

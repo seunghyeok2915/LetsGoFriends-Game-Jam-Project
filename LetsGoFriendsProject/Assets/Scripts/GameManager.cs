@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     private int frozenStack = 0;
 
     public List<float> phaseTime;
+    public List<float> highlightTime;
 
     private static GameManager instance;
     public static GameManager Instance
@@ -102,13 +103,29 @@ public class GameManager : MonoBehaviour
 
         passTime += Time.deltaTime;
 
-        if (phaseTime.Count <= 0) return;
-
-        if (PassTime >= phaseTime[0])
+        if (phaseTime.Count > 0)
         {
-            phaseTime.RemoveAt(0);
-            PhaseUp();
+            if (PassTime >= phaseTime[0])
+            {
+                phaseTime.RemoveAt(0);
+                PhaseUp();
+            }
         }
+
+        if (highlightTime.Count > 0)
+        {
+            if (PassTime >= highlightTime[0])
+            {
+                highlightTime.RemoveAt(0);
+                Highlight();
+            }
+        }
+
+    }
+
+    public void Highlight()
+    {
+        CamShake(10, 2f);
     }
 
     public void PhaseUp()
@@ -195,7 +212,7 @@ public class GameManager : MonoBehaviour
         frozenStack++;
         if (frozenStack >= 3)
         {
-            CreateObstacle("HiderObstacle", MovingType.Straight, 3f);
+            CreateObstacle("FrozenObstacle", MovingType.Straight, 3f);
             frozenStack = 0;
         }
     }
@@ -214,7 +231,7 @@ public class GameManager : MonoBehaviour
         frozenStack++;
         if (frozenStack >= 2)
         {
-            CreateObstacle("HiderObstacle", MovingType.Straight, 3f);
+            CreateObstacle("FrozenObstacle", MovingType.Straight, 3f);
             frozenStack = 0;
         }
     }

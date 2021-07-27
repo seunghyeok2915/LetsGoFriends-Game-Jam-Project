@@ -12,6 +12,13 @@ public class PlayerMove : MonoBehaviour
     private float runningTime = 0;
     private Vector2 newPos = new Vector2();
 
+    public float orginSpeed;
+
+    private void Start()
+    {
+        orginSpeed = speed;
+    }
+
     private void Update()
     {
         runningTime += Time.deltaTime * speed;
@@ -24,5 +31,17 @@ public class PlayerMove : MonoBehaviour
     public void ChangeDirection()
     {
         speed = speed * -1f;
+    }
+
+    public void FrozenPlayer(float time)
+    {
+        StartCoroutine(Frozen(time));
+    }
+
+    public IEnumerator Frozen(float time)
+    {
+        speed = speed / 2;
+        yield return new WaitForSeconds(time);
+        speed = (orginSpeed * speed) / Mathf.Abs(speed);
     }
 }

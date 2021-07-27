@@ -1309,6 +1309,9 @@ MonoBehaviour:
   - 25
   - 50
   - 75
+  highlightTime:
+  - 30
+  - 152
 --- !u!4 &283071099
 Transform:
   m_ObjectHideFlags: 0

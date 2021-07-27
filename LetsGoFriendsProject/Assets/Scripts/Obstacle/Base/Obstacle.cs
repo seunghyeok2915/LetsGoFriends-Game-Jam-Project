@@ -12,7 +12,6 @@ public enum MovingType
 public class Obstacle : MonoBehaviour
 {
     private MovingType movingType;
-    private bool onScreen;
 
     protected SpriteRenderer spriteRenderer;
     protected TrailRenderer trailRenderer;
@@ -80,14 +79,12 @@ public class Obstacle : MonoBehaviour
                 break;
         }
 
-        onScreen = false;
-
         spriteRenderer.color = oriColor;
         trailRenderer.material.color = oriColor;
 
         trailRenderer.Clear();
 
-        Invoke("ActiveFalse", 10f);
+        Invoke("ActiveFalse", 20f);
     }
 
     public virtual void ActiveFalse()
@@ -106,22 +103,6 @@ public class Obstacle : MonoBehaviour
             gameObject.SetActive(false);
         });
     }
-
-    private void Update()
-    {
-        if ((transform.position.x > -9f && transform.position.x < 9f) && (transform.position.y > -5f && transform.position.y < 5f))
-        {
-            onScreen = true;
-        }
-        if (onScreen)
-        {
-            if ((transform.position.x < -9f && transform.position.x > 9f) && (transform.position.y < -5f && transform.position.y > 5f))
-            {
-                ActiveFalse();
-            }
-        }
-    }
-
 
     public virtual void OnEnterPlayer(GameObject player) { }
 

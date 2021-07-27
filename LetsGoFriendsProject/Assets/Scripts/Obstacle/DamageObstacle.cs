@@ -6,6 +6,6 @@ public class DamageObstacle : Obstacle
 {
     public override void OnEnterPlayer(GameObject player)
     {
-        //TODO 데미지 or 끝내
+        GameManager.Instance.GameOver();
     }
 }

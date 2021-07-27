@@ -87,6 +87,14 @@ public class Obstacle : MonoBehaviour
         StartCoroutine(ActiveFalseCour());
     }
 
+    private void Update()
+    {
+        if (GameManager.Instance.isStart == false)
+        {
+            ActiveFalse();
+        }
+    }
+
     private IEnumerator ActiveFalseCour()
     {
         yield return new WaitForSeconds(20f);

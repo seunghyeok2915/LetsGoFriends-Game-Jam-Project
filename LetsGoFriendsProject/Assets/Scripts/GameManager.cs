@@ -4,6 +4,8 @@ using UnityEngine;
 using DG.Tweening;
 using Cinemachine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,19 +21,25 @@ public class GameManager : MonoBehaviour
     public PlayerMove playerMove;
 
     private float radius;
-    private bool isStart;
+    public bool isStart;
 
 
     public EffectCamera camEffect;
     public CinemachineVirtualCamera virtualCamera;
     public RippleEffect rippleEffect;
+    public GameOverPage gameOverPage;
+    public SheetEditor sheetEditor;
 
 
     private int hiderStack = 0;
     private int frozenStack = 0;
 
     public List<float> phaseTime;
+    private List<float> phaseTimeCache;
     public List<float> highlightTime;
+    private List<float> highlightTimeCache;
+
+    private Vignette vg;
 
     private static GameManager instance;
     public static GameManager Instance
@@ -63,6 +71,10 @@ public class GameManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(this);
+        var pp = FindObjectOfType<PostProcessVolume>();
+        pp.profile.TryGetSettings<Vignette>(out vg);
+        phaseTimeCache = phaseTime.ToList();
+        highlightTimeCache = highlightTime.ToList();
     }
 
     private void OnDestroy()
@@ -75,6 +87,9 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        phaseTime = phaseTimeCache.ToList();
+        highlightTime = highlightTimeCache.ToList();
+        sheetEditor.SetRecord();
         SoundManager.Instance.PlayBGMSound("TitleBackGround");
         passTime = 0f;
         radius = playerMove.radius;
@@ -82,9 +97,7 @@ public class GameManager : MonoBehaviour
         isStart = true;
 
         FindObjectOfType<SheetEditor>().EffectStart();
-        Vignette vg;
-        var pp = FindObjectOfType<PostProcessVolume>();
-        pp.profile.TryGetSettings<Vignette>(out vg);
+
         vg.enabled.value = true;
     }
 
@@ -95,6 +108,8 @@ public class GameManager : MonoBehaviour
         PoolManager.CreatePool<Obstacle>("BounceObstacle", gameObject, 5);
         PoolManager.CreatePool<Obstacle>("HiderObstacle", gameObject, 5); //FrozenObstacle
         PoolManager.CreatePool<Obstacle>("FrozenObstacle", gameObject, 5);
+
+        SoundManager.Instance.PlayBGMSound("Lobby");
     }
 
     private void Update()
@@ -280,6 +295,22 @@ public class GameManager : MonoBehaviour
             });
 
         PoolManager.GetItem<DrawEffectCircle>("EffectCircle").DrawCircle();
+    }
+
+    public void GameOver()
+    {
+        SoundManager.Instance.PlayBGMSound("Lobby");
+        SoundManager.Instance.PlayFXSound("GameOver");
+        isStart = false;
+        vg.enabled.value = false;
+        StopAllCoroutines();
+        gameOverPage.gameObject.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+        gameOverPage.gameObject.SetActive(false);
+        StartGame();
     }
 
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Cinemachine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     private float passTime;
 
     public float spawnDelay;
+    public int phase = 1;
 
     public List<Transform> spawnPointList = new List<Transform>();
     public List<string> obstacleList;
@@ -23,6 +25,11 @@ public class GameManager : MonoBehaviour
     public EffectCamera camEffect;
 
     public RippleEffect rippleEffect;
+
+    private int hiderStack = 0;
+    private int frozenStack = 0;
+
+    public List<float> phaseTime;
 
     private static GameManager instance;
     public static GameManager Instance
@@ -71,6 +78,12 @@ public class GameManager : MonoBehaviour
         radius = playerMove.radius;
         StartCoroutine(SpawnObstacles());
         isStart = true;
+
+        FindObjectOfType<SheetEditor>().EffectStart();
+        Vignette vg;
+        var pp = FindObjectOfType<PostProcessVolume>();
+        pp.profile.TryGetSettings<Vignette>(out vg);
+        vg.enabled.value = true;
     }
 
     void Start()
@@ -86,12 +99,33 @@ public class GameManager : MonoBehaviour
         if (!isStart) return;
 
         passTime += Time.deltaTime;
-        if (PassTime > 10)
-            radius = 3f;
+
+        if (phaseTime.Count <= 0) return;
+
+        if (PassTime >= phaseTime[0])
+        {
+            phaseTime.RemoveAt(0);
+            PhaseUp();
+        }
+    }
+
+    public void PhaseUp()
+    {
+        phase++;
+        radius = playerMove.radius - 0.5f;
         DOTween.To(() => playerMove.radius, x => playerMove.radius = x, radius, 3f);
     }
 
     public IEnumerator SpawnObstacles()
+    {
+        while (true)
+        {
+            SpawnObstcle();
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+    public IEnumerator SpawnRandomObstacles()
     {
         while (true)
         {
@@ -113,10 +147,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CreateObstacle(string name, MovingType movingType, float speed)
+    public void CreateObstacle(string name, MovingType movingType, float speed, float movingDepth = 1f)
     {
         int randIndex = Random.Range(0, spawnPointList.Count);
-        PoolManager.GetItem<Obstacle>(name).SetObstacle(movingType, spawnPointList[randIndex].position, new Vector2(0, 0), speed);
+        PoolManager.GetItem<Obstacle>(name).SetObstacle(movingType, spawnPointList[randIndex].position, new Vector2(0, 0), speed, movingDepth);
     }
 
     public static void CamShake(float intense, float during)
@@ -124,9 +158,73 @@ public class GameManager : MonoBehaviour
         instance.camEffect.SetShake(intense, during);
     }
 
-    public void rippleEffects()
+    public void RippleEffects()
     {
         rippleEffect.Emit(Camera.main.WorldToViewportPoint(transform.position));
+    }
+
+    public void SpawnMobPhase1()
+    {
+        CreateObstacle("DamageObstacle", MovingType.Straight, 3f);
+    }
+
+    public void SpawnMobPhase2()
+    {
+        CreateObstacle("DamageObstacle", MovingType.Straight, 3f);
+        CreateObstacle("DamageObstacle", MovingType.Curve, 3f, 1f);
+    }
+
+    public void SpawnMobPhase3()
+    {
+        CreateObstacle("DamageObstacle", MovingType.Straight, 3f);
+        CreateObstacle("DamageObstacle", MovingType.Curve, 3f, 1f);
+        hiderStack++;
+        if (hiderStack >= 2)
+        {
+            CreateObstacle("HiderObstacle", MovingType.Straight, 3f);
+            hiderStack = 0;
+        }
+    }
+
+    public void SpawnMobPhase4()
+    {
+        CreateObstacle("DamageObstacle", MovingType.Straight, 3f);
+        CreateObstacle("DamageObstacle", MovingType.Curve, 3f, 1f);
+        hiderStack++;
+        if (hiderStack >= 2)
+        {
+            CreateObstacle("HiderObstacle", MovingType.Straight, 3f);
+            hiderStack = 0;
+        }
+
+        frozenStack++;
+        if (frozenStack >= 3)
+        {
+            CreateObstacle("HiderObstacle", MovingType.Straight, 3f);
+            frozenStack = 0;
+        }
+    }
+
+
+    public void SpawnObstcle()
+    {
+        switch (phase)
+        {
+            case 1:
+                SpawnMobPhase1();
+                break;
+            case 2:
+                SpawnMobPhase2();
+                break;
+            case 3:
+                SpawnMobPhase3();
+                break;
+            case 4:
+                SpawnMobPhase4();
+                break;
+            default:
+                break;
+        }
     }
 
 }

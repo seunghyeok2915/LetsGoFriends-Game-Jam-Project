@@ -40,7 +40,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            GameManager.Instance.rippleEffects();
+            GameManager.Instance.RippleEffects();
             onClickMouseLeft?.Invoke();
         }
 

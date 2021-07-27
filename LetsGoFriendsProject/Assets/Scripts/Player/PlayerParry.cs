@@ -22,14 +22,14 @@ public class PlayerParry : MonoBehaviour
 
     }
 
-    public void OnSpaceBtn()
+    private void Update()
     {
         radius += Time.deltaTime * radiusSpeed;
         radius = Mathf.Clamp(radius, 0, maxRadius);
         CreatePoints();
     }
 
-    public void OnSpaceBtnUp()
+    public void OnSpaceBtn()
     {
         RaycastHit2D[] colls = Physics2D.CircleCastAll(transform.position, radius, Vector2.zero, obstacleLayer);
 
@@ -56,6 +56,11 @@ public class PlayerParry : MonoBehaviour
 
         radius = 0;
         CreatePoints();
+    }
+
+    public void OnSpaceBtnUp()
+    {
+
     }
 
     void CreatePoints()

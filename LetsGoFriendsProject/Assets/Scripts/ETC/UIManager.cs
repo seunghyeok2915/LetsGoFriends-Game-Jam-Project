@@ -17,7 +17,14 @@ public class UIManager : MonoBehaviour
 
     public void Close()
     {
+        StartCoroutine( TimeScale());
+    }
+
+    IEnumerator TimeScale()
+    {
+        yield return new WaitForSecondsRealtime(3);
         Time.timeScale = 1;
+
     }
 
     public void Exit()

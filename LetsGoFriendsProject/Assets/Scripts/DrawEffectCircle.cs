@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class DrawCircle : MonoBehaviour
+public class DrawEffectCircle : MonoBehaviour
 {
     public int segments;
 
-    public PlayerMove playerMove;
+    public float radius;
 
     public float width;
     LineRenderer line;
@@ -35,8 +35,8 @@ public class DrawCircle : MonoBehaviour
 
         for (int i = 0; i < (segments + 1); i++)
         {
-            x = Mathf.Cos(Mathf.Deg2Rad * angle) * playerMove.radius;
-            y = Mathf.Sin(Mathf.Deg2Rad * angle) * playerMove.radius;
+            x = Mathf.Cos(Mathf.Deg2Rad * angle) * radius;
+            y = Mathf.Sin(Mathf.Deg2Rad * angle) * radius;
 
             line.SetPosition(i, new Vector3(x, y, z));
             angle += (360f / segments);

@@ -10,7 +10,18 @@ public class UIManager : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.Escape))
         {
+            Time.timeScale = 0;
             settingPanel.SetActive(true);
         }
+    }
+
+    public void Close()
+    {
+        Time.timeScale = 1;
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 }

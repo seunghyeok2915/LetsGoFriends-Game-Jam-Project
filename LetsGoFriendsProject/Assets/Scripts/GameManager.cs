@@ -6,6 +6,7 @@ using Cinemachine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,6 +44,14 @@ public class GameManager : MonoBehaviour
     private List<float> highlightTimeCache;
 
     private Vignette vg;
+
+    public int Score;
+    public Text scoreText;
+    public int sumScore;
+
+
+
+
 
     private static GameManager instance;
     public static GameManager Instance
@@ -101,6 +110,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SpawnObstacles());
         isStart = true;
         FindObjectOfType<SheetEditor>().EffectStart();
+        Score = 0;
 
         vg.enabled.value = true;
     }
@@ -119,6 +129,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+          if(Input.GetKeyDown(KeyCode.O))
+        {
+            StartGame();
+
+        }
+
         if (!isStart) return;
 
         passTime += Time.deltaTime;
@@ -140,12 +156,17 @@ public class GameManager : MonoBehaviour
                 Highlight();
             }
         }
+        sumScore = Score + (int)PassTime;
+        scoreText.text = ($"{(Score + PassTime).ToString("F0")}");
+
+
+
 
     }
 
     public void Highlight()
     {
-        rainEffect.SetActive(true);
+       // rainEffect.SetActive(true);
         CamShake(10, 2f);
     }
 
@@ -198,17 +219,20 @@ public class GameManager : MonoBehaviour
 
     public void SpawnMobPhase1()
     {
+        Debug.Log("페이즈 1");
         CreateObstacle("DamageObstacle", MovingType.Straight, 3f);
     }
 
     public void SpawnMobPhase2()
     {
+         Debug.Log("페이즈 2");
         CreateObstacle("DamageObstacle", MovingType.Straight, 3f);
         CreateObstacle("DamageObstacle", MovingType.Curve, 3f, 1f);
     }
 
     public void SpawnMobPhase3()
     {
+         Debug.Log("페이즈 3");
         CreateObstacle("DamageObstacle", MovingType.Straight, 3f);
         CreateObstacle("DamageObstacle", MovingType.Curve, 3f, 1f);
         hiderStack++;
@@ -221,6 +245,7 @@ public class GameManager : MonoBehaviour
 
     public void SpawnMobPhase4()
     {
+         Debug.Log("페이즈 4");
         CreateObstacle("DamageObstacle", MovingType.Straight, 3f);
         CreateObstacle("DamageObstacle", MovingType.Curve, 3f, 1f);
         hiderStack++;
@@ -240,6 +265,7 @@ public class GameManager : MonoBehaviour
 
     public void SpawnMobPhase5()
     {
+         Debug.Log("페이즈 5");
         CreateObstacle("DamageObstacle", MovingType.Straight, 3f);
         CreateObstacle("DamageObstacle", MovingType.Curve, 3f, 1f);
         hiderStack++;

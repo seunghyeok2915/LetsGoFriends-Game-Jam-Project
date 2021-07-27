@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public EffectCamera camEffect;
     public CinemachineVirtualCamera virtualCamera;
     public RippleEffect rippleEffect;
+    public DrawEffectCircle drawEffectCircle;
 
 
     private int hiderStack = 0;
@@ -233,11 +234,16 @@ public class GameManager : MonoBehaviour
 
     public void CamZoomInOut()
     {
+        // DOTween.To(() => virtualCamera.m_Lens.OrthographicSize, value => virtualCamera.m_Lens.OrthographicSize = value, 7f, 0).OnComplete(() =>
+        //     {
+        //         DOTween.To(() => virtualCamera.m_Lens.OrthographicSize, value => virtualCamera.m_Lens.OrthographicSize = value, 8.3f, 0.1f);
+        //     });
 
-        DOTween.To(() => virtualCamera.m_Lens.OrthographicSize, value => virtualCamera.m_Lens.OrthographicSize = value, 8f, 0).OnComplete(() =>
-            {
-                DOTween.To(() => virtualCamera.m_Lens.OrthographicSize, value => virtualCamera.m_Lens.OrthographicSize = value, 8.3f, 0.2f);
-            });
+        DOTween.To(() => drawEffectCircle.radius, value => drawEffectCircle.radius = value, playerMove.radius + 0.5f, 0).OnComplete(() =>
+             {
+                 DOTween.To(() => drawEffectCircle.radius, value => drawEffectCircle.radius = value, playerMove.radius, 0.2f);
+             });
+
     }
 
 }

@@ -518,6 +518,7 @@ GameObject:
   m_Component:
   - component: {fileID: 283071099}
   - component: {fileID: 283071098}
+  - component: {fileID: 283071100}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -599,6 +600,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &283071100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283071097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04a7c58a91500c47b577bff73ae6494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  segments: 0
+  playerMove: {fileID: 1574923318}
+  width: 0
 --- !u!1 &285556548
 GameObject:
   m_ObjectHideFlags: 3
@@ -1985,7 +2001,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8.3
+  orthographic size: 7.68573
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2290,7 +2306,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 8.3
+    OrthographicSize: 7.68573
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0

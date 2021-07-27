@@ -22,6 +22,8 @@ public class SheetEditor : MonoBehaviour
 
     void Start()
     {
+        if (isRecord) noteList.Clear();
+
         string fileStr = getFilePath(saveFileName);
         if (File.Exists(fileStr)) // 현재 이 경로에 세이브 파일이 존재하냐
         {
@@ -37,6 +39,7 @@ public class SheetEditor : MonoBehaviour
         {
             print("no File");
         }
+
     }
 
     string getFilePath(string fileName)
@@ -77,16 +80,18 @@ public class SheetEditor : MonoBehaviour
                     sw.Close();
                 }
             }
-
-            if (noteList.Count <= 0) return;
-
-            if (time >= noteList[0])
+            else
             {
-                Debug.Log(time);
-                noteList.RemoveAt(0);
-                CameraMove();
-            }
+                if (noteList.Count <= 0) return;
 
+                if (time >= noteList[0])
+                {
+                    Debug.Log(time);
+                    noteList.RemoveAt(0);
+                    CameraMove();
+                }
+
+            }
         }
     }
 

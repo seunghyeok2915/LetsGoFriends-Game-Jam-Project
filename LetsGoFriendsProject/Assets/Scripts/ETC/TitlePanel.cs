@@ -13,6 +13,7 @@ public class TitlePanel : MonoBehaviour
     public Button button;
 
 
+
     public Ease ease;
     public int duration;
 
@@ -22,6 +23,7 @@ public class TitlePanel : MonoBehaviour
 
     void Start()
     {
+
         SoundManager.Instance.AdjustMasterVolume(1);
         SoundManager.Instance.AdjustFxVoulme(1);
         SoundManager.Instance.AdjustBGMVolume(1);
@@ -45,6 +47,7 @@ public class TitlePanel : MonoBehaviour
 
     public void GameScene()
     {
+
         button.gameObject.SetActive(false);
         mainImage.rectTransform.DOAnchorPosY(-1240, 1);
         GameManager.Instance.StartGame();

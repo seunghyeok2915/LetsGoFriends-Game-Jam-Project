@@ -63,6 +63,26 @@ public class PlayerParry : MonoBehaviour
             rainObject.SetActive(true);
         }
 
+        switch (countMs)
+        {
+            case 1:
+                GameManager.Instance.Score+= 5;
+            break;
+
+             case 2:
+                 GameManager.Instance.Score+= 25;
+            break;
+
+             case 3:
+                 GameManager.Instance.Score+= 125;
+            break;
+
+             case 4:
+                 GameManager.Instance.Score+= 625;
+            break;
+
+        }
+
         radius = 0;
         CreatePoints();
 

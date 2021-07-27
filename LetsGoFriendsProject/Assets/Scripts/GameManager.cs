@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public PlayerMove playerMove;
 
     private float radius;
+    private float oriRadius;
     public bool isStart;
 
 
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
     public GameOverPage gameOverPage;
     public SheetEditor sheetEditor;
     public GameObject rainEffect;
+
 
 
     private int hiderStack = 0;
@@ -94,10 +96,10 @@ public class GameManager : MonoBehaviour
         SoundManager.Instance.PlayBGMSound("TitleBackGround");
         passTime = 0f;
         phase = 1;
+        playerMove.radius = oriRadius;
         radius = playerMove.radius;
         StartCoroutine(SpawnObstacles());
         isStart = true;
-
         FindObjectOfType<SheetEditor>().EffectStart();
 
         vg.enabled.value = true;
@@ -112,6 +114,7 @@ public class GameManager : MonoBehaviour
         PoolManager.CreatePool<Obstacle>("FrozenObstacle", gameObject, 5);
 
         SoundManager.Instance.PlayBGMSound("Lobby");
+        oriRadius = playerMove.radius;
     }
 
     private void Update()

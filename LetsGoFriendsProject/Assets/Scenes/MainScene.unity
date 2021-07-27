@@ -1435,6 +1435,7 @@ MonoBehaviour:
   - 50
   - 75
   highlightTime:
+  - 5
   - 30
   - 152
 --- !u!4 &283071099
@@ -1497,8 +1498,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
   m_PivotOffset: {x: 0, y: 0, z: 0}
-  m_AmplitudeGain: 1.373284
-  m_FrequencyGain: 0
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 1
   mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!114 &285556551
 MonoBehaviour:
@@ -3969,7 +3970,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1081784288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d934394b140e9d4d92ad9aaf63a7c6d, type: 3}
+  m_Script: {fileID: 11500000, guid: 17235efb004466c41bf004732517e0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   restartBtn: {fileID: 197524777}

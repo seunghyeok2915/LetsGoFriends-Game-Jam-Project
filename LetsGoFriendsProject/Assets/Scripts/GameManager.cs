@@ -19,10 +19,12 @@ public class GameManager : MonoBehaviour
     private float radius;
     private bool isStart;
 
-    public CinemachineTargetGroup cinemachine;
-    public EffectCamera camEffect;
 
+    public EffectCamera camEffect;
+    public CinemachineVirtualCamera virtualCamera;
     public RippleEffect rippleEffect;
+
+
 
     private static GameManager instance;
     public static GameManager Instance
@@ -124,9 +126,20 @@ public class GameManager : MonoBehaviour
         instance.camEffect.SetShake(intense, during);
     }
 
-    public void rippleEffects()
+    public void RippleEffects()
     {
         rippleEffect.Emit(Camera.main.WorldToViewportPoint(transform.position));
+    }
+
+    public void CamZoomInOut()
+    {
+
+        DOTween.To(()=> virtualCamera.m_Lens.OrthographicSize,value=> virtualCamera.m_Lens.OrthographicSize = value, 4.7f,0).OnComplete(() =>
+        {
+            DOTween.To(() => virtualCamera.m_Lens.OrthographicSize, value => virtualCamera.m_Lens.OrthographicSize = value, 5 , 0.1f );
+        });
+
+
     }
 
 }

@@ -9,7 +9,9 @@ public class TitlePanel : MonoBehaviour
 {
     public Image panelImage;
     public Image mainImage;
+    public Text mouseTxt;
     public AudioSource audioSource;
+    public Button button;
 
 
     public Ease ease;
@@ -28,9 +30,11 @@ public class TitlePanel : MonoBehaviour
 
     }
 
-    void OnEnable()
-    {
 
+
+    public void titleLogo()
+    {
+        SoundManager.Instance.PlayFXSound("InfoClick");
         panelImage.rectTransform.DOAnchorPosY(13, duration).SetEase(ease).OnComplete(() =>
         {
             FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
@@ -42,6 +46,7 @@ public class TitlePanel : MonoBehaviour
 
     public void GameScene()
     {
+        button.gameObject.SetActive(false);
         mainImage.rectTransform.DOAnchorPosY(-1240, 1);
         GameManager.Instance.StartGame();
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+[RequireComponent(typeof(LineRenderer))]
 public class DrawEffectCircle : MonoBehaviour
 {
     public int segments;
@@ -11,6 +12,14 @@ public class DrawEffectCircle : MonoBehaviour
 
     public float width;
     LineRenderer line;
+
+    public void DrawCircle()
+    {
+        DOTween.To(() => radius, value => radius = value, GameManager.Instance.playerMove.radius + 1f, 0.01f).OnComplete(() =>
+             {
+                 DOTween.To(() => radius, value => radius = value, GameManager.Instance.playerMove.radius, 0.4f).OnComplete(() => gameObject.SetActive(false));
+             });
+    }
 
     void Start()
     {

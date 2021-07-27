@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
     public EffectCamera camEffect;
     public CinemachineVirtualCamera virtualCamera;
     public RippleEffect rippleEffect;
-    public DrawEffectCircle drawEffectCircle;
 
 
     private int hiderStack = 0;
@@ -90,6 +89,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        PoolManager.CreatePool<DrawEffectCircle>("EffectCircle", gameObject, 10);
         PoolManager.CreatePool<Obstacle>("DamageObstacle", gameObject, 5);
         PoolManager.CreatePool<Obstacle>("BounceObstacle", gameObject, 5);
         PoolManager.CreatePool<Obstacle>("HiderObstacle", gameObject, 5); //FrozenObstacle
@@ -262,11 +262,7 @@ public class GameManager : MonoBehaviour
                 DOTween.To(() => virtualCamera.m_Lens.OrthographicSize, value => virtualCamera.m_Lens.OrthographicSize = value, 8.1f, 0.2f);
             });
 
-        DOTween.To(() => drawEffectCircle.radius, value => drawEffectCircle.radius = value, playerMove.radius + 1f, 0).OnComplete(() =>
-             {
-                 DOTween.To(() => drawEffectCircle.radius, value => drawEffectCircle.radius = value, playerMove.radius, 0.2f);
-             });
-
+        PoolManager.GetItem<DrawEffectCircle>("EffectCircle").DrawCircle();
     }
 
 }

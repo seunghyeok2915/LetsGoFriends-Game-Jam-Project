@@ -44,7 +44,7 @@ public class PlayerInput : MonoBehaviour
             onClickMouseLeft?.Invoke();
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             playerParry.OnSpaceBtn();
         }
@@ -58,5 +58,6 @@ public class PlayerInput : MonoBehaviour
     private void RegisterEvents()
     {
         onClickMouseLeft.AddListener(playerMove.ChangeDirection);
+
     }
 }

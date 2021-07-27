@@ -99,6 +99,6 @@ public class SheetEditor : MonoBehaviour
 
     public void CameraMove()
     {
-        //GameManager.Instance.RippleEffects();
+        GameManager.Instance.CamZoomInOut();
     }
 }

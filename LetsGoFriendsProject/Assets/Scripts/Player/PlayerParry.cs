@@ -35,7 +35,6 @@ public class PlayerParry : MonoBehaviour
 
         foreach (var item in colls)
         {
-
             if (item.collider.CompareTag("Obstacle"))
             {
                 Debug.Log(item.collider.gameObject.name);
@@ -49,8 +48,9 @@ public class PlayerParry : MonoBehaviour
 
                     ms.SetDirection(bounceVector);
                     ms.gameObject.AddComponent<ReflectObstacle>();
-                }
 
+                    GameManager.Instance.RippleEffects();
+                }
             }
         }
 

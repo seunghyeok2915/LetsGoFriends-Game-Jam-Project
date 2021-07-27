@@ -16,19 +16,21 @@ public class GameOverPage : MonoBehaviour
     public RectTransform FxHolder;
     public Image CircleImg;
 
-    [SerializeField] [Range(0,1)] float progress = 0f;
-
-
-    public Button addRankBtn;
+    [SerializeField] [Range(0, 1)] float progress = 0f;
 
     private void Start()
     {
-
         restartBtn.onClick.AddListener(() => GameManager.Instance.RestartGame());
+        registerScoreBtn.onClick.AddListener(() =>
+        {
+            registerScoreBtn.gameObject.SetActive(false);
+            GameManager.Instance.addRankPage.gameObject.SetActive(true);
+        });
     }
 
     void OnEnable()
     {
+        registerScoreBtn.gameObject.SetActive(true);
         ScoreText.DOText(GameManager.Instance.sumScore.ToString(), 1, true, ScrambleMode.All).OnComplete(() =>
           {
               TimeText.DOText($"{GameManager.Instance.PassTime.ToString("F1")} ({(287 % GameManager.Instance.PassTime).ToString("F2")})%", 1, true, ScrambleMode.All)
@@ -53,8 +55,8 @@ public class GameOverPage : MonoBehaviour
 
     void Update()
     {
-      //  CircleImg.fillAmount = progress ;
-        FxHolder.rotation = Quaternion.Euler(new Vector3(0f,0f,-progress * 360));
+        //  CircleImg.fillAmount = progress ;
+        FxHolder.rotation = Quaternion.Euler(new Vector3(0f, 0f, -progress * 360));
     }
 
 }

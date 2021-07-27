@@ -71,7 +71,7 @@ public class RankDBManager : MonoBehaviour
 
         print(json);
         PlayerRankData playerRank = JsonUtility.FromJson<PlayerRankData>(json);
-        if (playerRank.score < 10) return;
+        if (playerRank.score == 0) return;
         playerRankDatas.Add(playerRank);
     }
 

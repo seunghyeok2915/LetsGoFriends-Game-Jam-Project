@@ -15,7 +15,7 @@ public class PlayerRankBox : MonoBehaviour
     {
         playerRankData = playerRank;
 
-        rankText.text = playerRankData.rank.ToString();
+        rankText.text = (playerRankData.rank + 1).ToString();
         nameText.text = playerRankData.name;
         scoreText.text = playerRankData.score.ToString();
 

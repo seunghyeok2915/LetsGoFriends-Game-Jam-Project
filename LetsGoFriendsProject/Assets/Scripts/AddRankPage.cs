@@ -19,6 +19,7 @@ public class AddRankPage : MonoBehaviour
     private void AddRank()
     {
         RankDBManager.Instance.AddRank(nameField.text, GameManager.Instance.sumScore);
+        GameManager.Instance.showRankPage.OpenPage();
         gameObject.SetActive(false);
     }
 

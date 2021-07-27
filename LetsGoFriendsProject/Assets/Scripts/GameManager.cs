@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public RippleEffect rippleEffect;
     public GameOverPage gameOverPage;
     public SheetEditor sheetEditor;
+    public GameObject rainEffect;
 
 
     private int hiderStack = 0;
@@ -92,6 +93,7 @@ public class GameManager : MonoBehaviour
         sheetEditor.SetRecord();
         SoundManager.Instance.PlayBGMSound("TitleBackGround");
         passTime = 0f;
+        phase = 1;
         radius = playerMove.radius;
         StartCoroutine(SpawnObstacles());
         isStart = true;
@@ -140,6 +142,7 @@ public class GameManager : MonoBehaviour
 
     public void Highlight()
     {
+        rainEffect.SetActive(true);
         CamShake(10, 2f);
     }
 

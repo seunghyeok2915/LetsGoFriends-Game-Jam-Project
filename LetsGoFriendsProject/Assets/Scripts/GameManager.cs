@@ -49,8 +49,9 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
     public int sumScore;
 
-    public AddRankPage addRankPage;
-    public ShowRankPage showRankPage;
+
+
+
 
     private static GameManager instance;
     public static GameManager Instance
@@ -128,7 +129,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O))
+          if(Input.GetKeyDown(KeyCode.O))
         {
             StartGame();
 
@@ -165,7 +166,7 @@ public class GameManager : MonoBehaviour
 
     public void Highlight()
     {
-        // rainEffect.SetActive(true);
+       // rainEffect.SetActive(true);
         CamShake(10, 2f);
     }
 
@@ -224,14 +225,14 @@ public class GameManager : MonoBehaviour
 
     public void SpawnMobPhase2()
     {
-        Debug.Log("페이즈 2");
+         Debug.Log("페이즈 2");
         CreateObstacle("DamageObstacle", MovingType.Straight, 3f);
         CreateObstacle("DamageObstacle", MovingType.Curve, 3f, 1f);
     }
 
     public void SpawnMobPhase3()
     {
-        Debug.Log("페이즈 3");
+         Debug.Log("페이즈 3");
         CreateObstacle("DamageObstacle", MovingType.Straight, 3f);
         CreateObstacle("DamageObstacle", MovingType.Curve, 3f, 1f);
         hiderStack++;
@@ -244,7 +245,7 @@ public class GameManager : MonoBehaviour
 
     public void SpawnMobPhase4()
     {
-        Debug.Log("페이즈 4");
+         Debug.Log("페이즈 4");
         CreateObstacle("DamageObstacle", MovingType.Straight, 3f);
         CreateObstacle("DamageObstacle", MovingType.Curve, 3f, 1f);
         hiderStack++;
@@ -264,7 +265,7 @@ public class GameManager : MonoBehaviour
 
     public void SpawnMobPhase5()
     {
-        Debug.Log("페이즈 5");
+         Debug.Log("페이즈 5");
         CreateObstacle("DamageObstacle", MovingType.Straight, 3f);
         CreateObstacle("DamageObstacle", MovingType.Curve, 3f, 1f);
         hiderStack++;

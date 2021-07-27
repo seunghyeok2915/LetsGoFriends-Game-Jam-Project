@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class GameOverPage : MonoBehaviour
 {
     public Button restartBtn;
-    public Button addRankBtn;
 
     private void Start()
     {

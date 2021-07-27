@@ -71,7 +71,8 @@ public class GameManager : MonoBehaviour
     {
         PoolManager.CreatePool<Obstacle>("DamageObstacle", gameObject, 5);
         PoolManager.CreatePool<Obstacle>("BounceObstacle", gameObject, 5);
-        PoolManager.CreatePool<Obstacle>("HiderObstacle", gameObject, 5);
+        PoolManager.CreatePool<Obstacle>("HiderObstacle", gameObject, 5); //FrozenObstacle
+        PoolManager.CreatePool<Obstacle>("FrozenObstacle", gameObject, 5);
     }
 
     private void Update()
@@ -90,13 +91,14 @@ public class GameManager : MonoBehaviour
         {
             int randIndex = Random.Range(0, obstacleList.Count);
             int randIndex2 = Random.Range(0, 2);
+            int randIndex3 = Random.Range(2, 4);
             switch (randIndex2)
             {
                 case 0:
-                    CreateObstacle(obstacleList[randIndex], MovingType.Straight, randIndex % 4 + 1);
+                    CreateObstacle(obstacleList[randIndex], MovingType.Straight, randIndex3);
                     break;
                 case 1:
-                    CreateObstacle(obstacleList[randIndex], MovingType.Curve, randIndex % 4 + 1);
+                    CreateObstacle(obstacleList[randIndex], MovingType.Curve, randIndex3);
                     break;
                 default:
                     break;

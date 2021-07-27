@@ -1646,7 +1646,7 @@ MonoBehaviour:
   m_Content: {fileID: 901981890}
   m_Horizontal: 1
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -3887,6 +3887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17235efb004466c41bf004732517e0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  restartBtn: {fileID: 197524777}
 --- !u!1 &1084669879
 GameObject:
   m_ObjectHideFlags: 0

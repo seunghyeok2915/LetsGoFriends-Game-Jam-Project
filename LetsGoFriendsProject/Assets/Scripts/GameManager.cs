@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
     public void PhaseUp()
     {
         phase++;
+        if (phase == 3) return;
         radius = playerMove.radius - 0.5f;
         DOTween.To(() => playerMove.radius, x => playerMove.radius = x, radius, 3f);
     }
@@ -199,6 +200,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SpawnMobPhase5()
+    {
+        CreateObstacle("DamageObstacle", MovingType.Straight, 3f);
+        CreateObstacle("DamageObstacle", MovingType.Curve, 3f, 1f);
+        hiderStack++;
+        if (hiderStack >= 2)
+        {
+            CreateObstacle("HiderObstacle", MovingType.Straight, 3f);
+            hiderStack = 0;
+        }
+
+        frozenStack++;
+        if (frozenStack >= 2)
+        {
+            CreateObstacle("HiderObstacle", MovingType.Straight, 3f);
+            frozenStack = 0;
+        }
+    }
+
 
     public void SpawnObstcle()
     {
@@ -215,6 +235,9 @@ public class GameManager : MonoBehaviour
                 break;
             case 4:
                 SpawnMobPhase4();
+                break;
+            case 5:
+                SpawnMobPhase5();
                 break;
             default:
                 break;

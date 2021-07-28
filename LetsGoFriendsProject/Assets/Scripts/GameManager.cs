@@ -172,13 +172,13 @@ public class GameManager : MonoBehaviour
     {
         rainEffect.SetActive(true);
         StartCoroutine(ColorGrading());
-        CamShake(20, 2f);
+        CamShake(10, 2f);
     }
 
     IEnumerator ColorGrading()
     {
         var pp = FindObjectOfType<PostProcessVolume>();
-        if (pp.profile.TryGetSettings<ColorGrading>(out cg))
+        if(pp.profile.TryGetSettings<ColorGrading>(out cg))
         {
             cg.enabled.value = true;
         }
@@ -190,7 +190,6 @@ public class GameManager : MonoBehaviour
     public void PhaseUp()
     {
         phase++;
-        CamShake(3f, 5f);
         if (phase == 3) return;
         radius = playerMove.radius - 0.5f;
         DOTween.To(() => playerMove.radius, x => playerMove.radius = x, radius, 3f);

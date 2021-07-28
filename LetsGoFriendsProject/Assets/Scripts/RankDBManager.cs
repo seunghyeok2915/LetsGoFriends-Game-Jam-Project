@@ -40,7 +40,6 @@ public class RankDBManager : MonoBehaviour
 
     public void StartGetPlayerData()
     {
-        playerRankDatas.Clear();
         GetPlayerData();
     }
 
@@ -60,7 +59,7 @@ public class RankDBManager : MonoBehaviour
         {
             yield return www.SendWebRequest();
 
-            if (www.isDone) { }
+            if (www.isDone) { StartGetPlayerData(); }
             else print("웹의 응답이 없습니다.");
         }
     }

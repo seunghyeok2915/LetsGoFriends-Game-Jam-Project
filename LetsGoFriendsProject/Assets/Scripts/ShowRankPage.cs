@@ -24,18 +24,18 @@ public class ShowRankPage : MonoBehaviour
     {
         waitText.gameObject.SetActive(true);
         gameObject.SetActive(true);
-        StartCoroutine(GetData());
-
+        RankDBManager.Instance.StartGetPlayerData();
     }
 
-    private IEnumerator GetData()
+    public void MakeBox()
     {
-        yield return new WaitForSeconds(5f);
         waitText.gameObject.SetActive(false);
         playerRankDatas = RankDBManager.Instance.playerRankDatas.ToList();
 
         for (int i = 0; i < playerRankDatas.Count; i++)
         {
+            if (i >= 5)
+                break;
             playerRankBoxes[i].SetBox(playerRankDatas[i]);
         }
     }

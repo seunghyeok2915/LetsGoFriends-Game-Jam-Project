@@ -11,21 +11,16 @@ public class PlayerRankData
     public int score;
 }
 
+[System.Serializable]
+public class Ranklist
+{
+    public List<PlayerRankData> list;
+}
+
 public class RankDBManager : MonoBehaviour
 {
-    const string URL = "https://script.google.com/macros/s/AKfycbwqYSEjaPmn72O9TTL0bAIHEWSSc7YL8EQFCKn47tVTvp7w95duZhg_dtzCAn8VLx6w/exec";
-    public List<PlayerRankData> playerRankDatas = new List<PlayerRankData>();
-
-    private IEnumerator GetData()
-    {
-        playerRankDatas.Clear();
-        for (int i = 0; i < 5; i++)
-        {
-            Debug.Log(i);
-            GetPlayerData(i);
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
+    const string URL = "https://script.google.com/macros/s/AKfycbwYx9NbFbORwq7Du991IsdSe-uPAf_7iHX2RRNYaX6z9w5uFqZxbZbIklOIFH42SBy9/exec";
+    public List<PlayerRankData> playerRankDatas;
 
     public void AddRank(string name, int score)
     {
@@ -41,16 +36,22 @@ public class RankDBManager : MonoBehaviour
         form.AddField("score", score);
 
         StartCoroutine(Post(form));
-
-        StartCoroutine(GetData());
     }
 
-    public void GetPlayerData(int num)
+    public void StartGetPlayerData()
+    {
+        playerRankDatas.Clear();
+        GetPlayerData();
+    }
+
+    public void GetPlayerData()
     {
         WWWForm form = new WWWForm();
         form.AddField("order", "getRank");
-        form.AddField("num", num);
-        StartCoroutine(Post(form));
+
+        Debug.Log("부름");
+
+        StartCoroutine(Get());
     }
 
     IEnumerator Post(WWWForm form)
@@ -59,7 +60,18 @@ public class RankDBManager : MonoBehaviour
         {
             yield return www.SendWebRequest();
 
-            if (www.isDone) Response(www.downloadHandler.text);
+            if (www.isDone) { }
+            else print("웹의 응답이 없습니다.");
+        }
+    }
+
+    IEnumerator Get()
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get(URL)) // 반드시 using을 써야한다
+        {
+            yield return www.SendWebRequest();
+
+            if (www.isDone) { Response(www.downloadHandler.text); }
             else print("웹의 응답이 없습니다.");
         }
     }
@@ -70,9 +82,11 @@ public class RankDBManager : MonoBehaviour
         if (string.IsNullOrEmpty(json)) return;
 
         print(json);
-        PlayerRankData playerRank = JsonUtility.FromJson<PlayerRankData>(json);
-        if (playerRank.score == 0) return;
-        playerRankDatas.Add(playerRank);
+
+        Ranklist playerRank = JsonUtility.FromJson<Ranklist>(json);
+        playerRankDatas = playerRank.list;
+
+        GameManager.Instance.showRankPage.MakeBox();
     }
 
     private static RankDBManager instance;

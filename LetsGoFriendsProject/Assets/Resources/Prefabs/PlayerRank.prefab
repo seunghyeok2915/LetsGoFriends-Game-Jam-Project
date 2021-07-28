@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 5837517285262025665}
   - component: {fileID: 5837517285262025667}
   - component: {fileID: 5837517285262025666}
-  - component: {fileID: 3588566439477682636}
+  - component: {fileID: 6352516853264181579}
   m_Layer: 5
   m_Name: PlayerRank
   m_TagString: Untagged
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3588566439477682636
+--- !u!114 &6352516853264181579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5837517285262025664}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 489b66a776d5bb748a099e75e654e0c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 92662b68232ef1b47b362ef53012b7f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rankText: {fileID: 2398576471995449411}

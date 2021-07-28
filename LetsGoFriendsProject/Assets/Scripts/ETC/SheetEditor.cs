@@ -6,6 +6,7 @@ using System.IO;
 public class SheetEditor : MonoBehaviour
 {
     public bool isRecord = false;
+
     public List<float> noteList = new List<float>();
 
     private AudioSource music;

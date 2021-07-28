@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 2385302715513795823}
   - component: {fileID: 2385302715513795809}
   - component: {fileID: 2385302715513795808}
-  - component: {fileID: 230852131}
+  - component: {fileID: 4418772996954957586}
   m_Layer: 5
   m_Name: AddRankPage
   m_TagString: Untagged
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &230852131
+--- !u!114 &4418772996954957586
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2385302715513795822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7ac76c9270db0541a3d4c29bfe2e2cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 487ce492e96d47c49a11b547723eb28b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2385302715790478481

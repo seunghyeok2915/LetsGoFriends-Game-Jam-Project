@@ -904,12 +904,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 784040385}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e79695a1b1f21249a6013963a6d039c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   settingPanel: {fileID: 1918681303}
+  countText: {fileID: 0}
+  InfoView: {fileID: 0}
 --- !u!4 &784040387
 Transform:
   m_ObjectHideFlags: 0
@@ -2196,6 +2198,7 @@ MonoBehaviour:
   panelImage: {fileID: 2111835892}
   mainImage: {fileID: 1659117157}
   audioSource: {fileID: 1659117161}
+  button: {fileID: 0}
   ease: 0
   duration: 1
   panelBtn: {fileID: 1659117160}
@@ -3216,6 +3219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRecord: 1
   noteList: []
+  sizeList: []
 --- !u!4 &1999362106
 Transform:
   m_ObjectHideFlags: 0

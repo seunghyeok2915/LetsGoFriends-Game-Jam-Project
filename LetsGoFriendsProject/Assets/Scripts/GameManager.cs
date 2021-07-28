@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
 
 
 
+
+
     private int hiderStack = 0;
     private int frozenStack = 0;
 
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
     private List<float> highlightTimeCache;
 
     private Vignette vg;
+    private ColorGrading cg;
 
     public int Score;
     public Text scoreText;
@@ -59,6 +62,7 @@ public class GameManager : MonoBehaviour
         {
             if (instance == null) // instance 가 비어있다면
             {
+
                 instance = FindObjectOfType<GameManager>(); // 찾아준다
                 if (instance == null) // 그래도 없다면
                 {
@@ -74,6 +78,7 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null)
         {
+
             instance = this as GameManager;
         }
         else
@@ -165,8 +170,21 @@ public class GameManager : MonoBehaviour
 
     public void Highlight()
     {
-        // rainEffect.SetActive(true);
+        rainEffect.SetActive(true);
+        StartCoroutine(ColorGrading());
         CamShake(10, 2f);
+    }
+
+    IEnumerator ColorGrading()
+    {
+        var pp = FindObjectOfType<PostProcessVolume>();
+        if(pp.profile.TryGetSettings<ColorGrading>(out cg))
+        {
+            cg.enabled.value = true;
+        }
+        yield return new WaitForSeconds(2f);
+        cg.enabled.value = false;
+
     }
 
     public void PhaseUp()

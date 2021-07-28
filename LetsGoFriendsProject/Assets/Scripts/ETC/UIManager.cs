@@ -9,6 +9,12 @@ public class UIManager : MonoBehaviour
     public GameObject settingPanel;
     private int delayTime;
     public Text countText;
+    public GameObject InfoView;
+
+    void Start()
+    {
+        InfoView.SetActive(true);
+    }
 
     void Update()
     {

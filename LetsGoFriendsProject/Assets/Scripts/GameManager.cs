@@ -349,12 +349,24 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        SoundManager.Instance.PlayBGMSound("Lobby");
-        SoundManager.Instance.PlayFXSound("GameOver");
+        SoundManager.Instance.PauseBGM();
+        SoundManager.Instance.PlayFXSound("Window");
+        DOTween.To(()=> playerMove.speed, value => playerMove.speed = value, 0f,2).OnComplete(()=> {
+            DOTween.To(()=> Time.timeScale, value => Time.timeScale = value, 1,1).OnComplete(()=> {
+
+         SoundManager.Instance.PlayBGMSound("Lobby");
         isStart = false;
         vg.enabled.value = false;
         StopAllCoroutines();
         gameOverPage.gameObject.SetActive(true);
+
+            });
+        });
+
+
+
+
+
     }
 
     public void RestartGame()

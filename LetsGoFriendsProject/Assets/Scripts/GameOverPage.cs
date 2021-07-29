@@ -51,6 +51,7 @@ public class GameOverPage : MonoBehaviour
         ScoreText.text = null;
         TimeText.text = null;
         curValue = 0;
+        CircleImg.fillAmount = 0;
     }
 
 

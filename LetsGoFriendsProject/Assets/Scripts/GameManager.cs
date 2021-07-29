@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public GameOverPage gameOverPage;
     public SheetEditor sheetEditor;
     public GameObject rainEffect;
+    public GameObject player;
 
 
 
@@ -50,6 +51,9 @@ public class GameManager : MonoBehaviour
 
     public int Score;
     public Text scoreText;
+    public Text timeText;
+    public Text scoreName;
+    public Text timeName;
     public int sumScore;
 
     public AddRankPage addRankPage;
@@ -103,6 +107,19 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+//       cg.enabled.value = false;
+         player.GetComponent<LineRenderer>().enabled = true;
+        sheetEditor.enabled = true;
+        virtualCamera.transform.position = new Vector3(0,0,-10);
+        virtualCamera.m_Lens.OrthographicSize = 8.1f;
+         virtualCamera.Follow = null;
+          player.transform.GetComponent<PlayerInput>().enabled = true;
+        player.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.yellow;
+        timeText.gameObject.SetActive(true);
+        scoreName.gameObject.SetActive(true);
+        timeName.gameObject.SetActive(true);
+        scoreText.gameObject.SetActive(true);
+        playerMove.GetComponent<CircleCollider2D>().enabled = true;
         phaseTime = phaseTimeCache.ToList();
         highlightTime = highlightTimeCache.ToList();
         sheetEditor.SetRecord();
@@ -115,10 +132,11 @@ public class GameManager : MonoBehaviour
         isStart = true;
         FindObjectOfType<SheetEditor>().EffectStart();
         Score = 0;
+        playerMove.speed = 1.5f;
 
         vg.enabled.value = true;
     }
-
+    public Canvas canvas;
     void Start()
     {
         PoolManager.CreatePool<DrawEffectCircle>("EffectCircle", gameObject, 10);
@@ -126,6 +144,7 @@ public class GameManager : MonoBehaviour
         PoolManager.CreatePool<Obstacle>("BounceObstacle", gameObject, 5);
         PoolManager.CreatePool<Obstacle>("HiderObstacle", gameObject, 5); //FrozenObstacle
         PoolManager.CreatePool<Obstacle>("FrozenObstacle", gameObject, 5);
+        PoolManager.CreatePool<PointText>("PlusPointText", canvas.gameObject, 5);
 
         SoundManager.Instance.PlayBGMSound("Lobby");
         oriRadius = playerMove.radius;
@@ -178,11 +197,11 @@ public class GameManager : MonoBehaviour
     IEnumerator ColorGrading()
     {
         var pp = FindObjectOfType<PostProcessVolume>();
-        if(pp.profile.TryGetSettings<ColorGrading>(out cg))
+        if (pp.profile.TryGetSettings<ColorGrading>(out cg))
         {
             cg.enabled.value = true;
         }
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         cg.enabled.value = false;
 
     }
@@ -348,19 +367,38 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        sheetEditor.enabled = false;
+       player.GetComponent<LineRenderer>().enabled = false;
+         timeText.gameObject.SetActive(false);
+        scoreText.gameObject.SetActive(false);
+         scoreName.gameObject.SetActive(false);
+        timeName.gameObject.SetActive(false);
+        player.transform.GetChild(0).GetComponent<SpriteRenderer>().DOFade(0,2);
+        player.transform.GetComponent<LineRenderer>().material.DOFade(0,2);
+        player.transform.GetComponent<PlayerInput>().enabled = false;
+
+        virtualCamera.Follow = player.transform;
+        playerMove.GetComponent<CircleCollider2D>().enabled = false;
         SoundManager.Instance.PauseBGM();
         SoundManager.Instance.PlayFXSound("Window");
-        DOTween.To(()=> playerMove.speed, value => playerMove.speed = value, 0f,2).OnComplete(()=> {
-            DOTween.To(()=> Time.timeScale, value => Time.timeScale = value, 1,1).OnComplete(()=> {
+        DOTween.To(() => virtualCamera.m_Lens.OrthographicSize, value => virtualCamera.m_Lens.OrthographicSize = value, 4f, 2).OnComplete(() =>
+        {
+            DOTween.To(() => playerMove.speed, value => playerMove.speed = value, 0f, 1f).OnComplete(() =>
+            {
+                DOTween.To(() => Time.timeScale, value => Time.timeScale = value, 1, 1).OnComplete(() =>
+                {
 
-         SoundManager.Instance.PlayBGMSound("Lobby");
-        isStart = false;
-        vg.enabled.value = false;
-        StopAllCoroutines();
-        gameOverPage.gameObject.SetActive(true);
+                    SoundManager.Instance.PlayBGMSound("Lobby");
+                    isStart = false;
+                    vg.enabled.value = false;
+                    StopAllCoroutines();
+                    gameOverPage.gameObject.SetActive(true);
 
+                });
             });
+
         });
+
 
 
 

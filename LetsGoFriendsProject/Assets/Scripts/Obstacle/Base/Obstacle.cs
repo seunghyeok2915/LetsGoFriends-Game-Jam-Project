@@ -128,4 +128,11 @@ public class Obstacle : MonoBehaviour
             OnEnterPlayer(other.gameObject);
         }
     }
+
+    public void ChangeColorRandom()
+    {
+        Color a = Random.ColorHSV();
+        spriteRenderer.color = a;
+        trailRenderer.material.color = a;
+    }
 }

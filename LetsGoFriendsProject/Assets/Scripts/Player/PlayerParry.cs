@@ -50,7 +50,7 @@ public class PlayerParry : MonoBehaviour
 
                     ms.SetDirection(bounceVector);
                     ms.gameObject.AddComponent<ReflectObstacle>();
-
+                    ms.gameObject.GetComponent<Obstacle>().ChangeColorRandom();
 
 
                     GameManager.Instance.RippleEffects();
@@ -67,18 +67,22 @@ public class PlayerParry : MonoBehaviour
         {
             case 1:
                 GameManager.Instance.Score+= 5;
+                PoolManager.GetItem<PointText>("PlusPointText").SetText(5);
             break;
 
              case 2:
                  GameManager.Instance.Score+= 25;
+                  PoolManager.GetItem<PointText>("PlusPointText").SetText(25);
             break;
 
              case 3:
                  GameManager.Instance.Score+= 125;
+                  PoolManager.GetItem<PointText>("PlusPointText").SetText(125);
             break;
 
              case 4:
                  GameManager.Instance.Score+= 625;
+                  PoolManager.GetItem<PointText>("PlusPointText").SetText(625);
             break;
 
         }

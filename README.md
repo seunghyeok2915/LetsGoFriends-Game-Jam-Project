@@ -2,7 +2,7 @@
 ## 게임소개
 ### 장르
 미정
-[![TimeOrbit](http://img.youtube.com/vi/B7PSusO3T-4/5.jpg)](https://youtu.be/B7PSusO3T-4?t=0s) 
+[![TimeOrbit](http://img.youtube.com/vi/B7PSusO3T-4/0.jpg)](https://youtu.be/B7PSusO3T-4?t=0s) 
 ## 팀원 소개
 ### 개발
 이승혁 김범주

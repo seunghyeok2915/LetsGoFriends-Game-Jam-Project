@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public Text countText;
     public GameObject InfoView;
 
+
     void Start()
     {
         InfoView.SetActive(true);
@@ -18,7 +19,7 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape))
         {
             Time.timeScale = 0;
             SoundManager.Instance.PauseBGM();
@@ -28,19 +29,28 @@ public class UIManager : MonoBehaviour
 
     public void Close()
     {
-        StartCoroutine( TimeScale(3));
-        countText.gameObject.SetActive(true);
+        if (GameManager.Instance.isStart)
+        {
+            StartCoroutine(TimeScale(3));
+        }
+        else
+        {
+        Time.timeScale = 1;
+        SoundManager.Instance.ResumeBGM();
+        }
+
     }
 
     IEnumerator TimeScale(int time)
     {
+        countText.gameObject.SetActive(true);
         int count = time;
-        while(count > 0)
+        while (count > 0)
         {
-        Debug.Log(count);
-        countText.text = ($"{count}초뒤에 게임이 시작됩니다");
-        yield return new WaitForSecondsRealtime(1);
-        count--;
+            Debug.Log(count);
+            countText.text = ($"{count}초뒤에 게임이 시작됩니다");
+            yield return new WaitForSecondsRealtime(1);
+            count--;
         }
         SoundManager.Instance.ResumeBGM();
         Time.timeScale = 1;

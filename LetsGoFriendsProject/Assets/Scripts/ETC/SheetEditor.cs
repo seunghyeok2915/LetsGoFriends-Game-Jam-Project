@@ -53,6 +53,7 @@ public class SheetEditor : MonoBehaviour
     {
         time = 0;
         music.Play();
+        isRecord = true;
     }
 
     public void EffectStart()
@@ -64,6 +65,7 @@ public class SheetEditor : MonoBehaviour
     {
         if (isRecord)
         {
+            time += Time.deltaTime;
             if (Input.GetKeyDown(KeyCode.F))
             {
                 noteList.Add(time);

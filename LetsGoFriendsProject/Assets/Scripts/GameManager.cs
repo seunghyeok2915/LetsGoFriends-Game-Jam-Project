@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
     private List<float> highlightTimeCache;
 
     private Vignette vg;
-    private ColorGrading cg;
 
     public int Score;
     public Text scoreText;
@@ -107,7 +106,6 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-//       cg.enabled.value = false;
          player.GetComponent<LineRenderer>().enabled = true;
         sheetEditor.enabled = true;
         virtualCamera.transform.position = new Vector3(0,0,-10);
@@ -123,7 +121,7 @@ public class GameManager : MonoBehaviour
         phaseTime = phaseTimeCache.ToList();
         highlightTime = highlightTimeCache.ToList();
         sheetEditor.SetRecord();
-        SoundManager.Instance.PlayBGMSound("TitleBackGround");
+        SoundManager.Instance.PlayBGMSound("Title");
         passTime = 0f;
         phase = 1;
         playerMove.radius = oriRadius;
@@ -190,21 +188,10 @@ public class GameManager : MonoBehaviour
     public void Highlight()
     {
         rainEffect.SetActive(true);
-        StartCoroutine(ColorGrading());
         CamShake(10, 2f);
     }
 
-    IEnumerator ColorGrading()
-    {
-        var pp = FindObjectOfType<PostProcessVolume>();
-        if (pp.profile.TryGetSettings<ColorGrading>(out cg))
-        {
-            cg.enabled.value = true;
-        }
-        yield return new WaitForSeconds(1f);
-        cg.enabled.value = false;
 
-    }
 
     public void PhaseUp()
     {
@@ -381,11 +368,11 @@ public class GameManager : MonoBehaviour
         playerMove.GetComponent<CircleCollider2D>().enabled = false;
         SoundManager.Instance.PauseBGM();
         SoundManager.Instance.PlayFXSound("Window");
-        DOTween.To(() => virtualCamera.m_Lens.OrthographicSize, value => virtualCamera.m_Lens.OrthographicSize = value, 4f, 2).OnComplete(() =>
+        DOTween.To(() => virtualCamera.m_Lens.OrthographicSize, value => virtualCamera.m_Lens.OrthographicSize = value, 4f, 1).OnComplete(() =>
         {
-            DOTween.To(() => playerMove.speed, value => playerMove.speed = value, 0f, 1f).OnComplete(() =>
+            DOTween.To(() => playerMove.speed, value => playerMove.speed = value, 0f, 0.7f).OnComplete(() =>
             {
-                DOTween.To(() => Time.timeScale, value => Time.timeScale = value, 1, 1).OnComplete(() =>
+                DOTween.To(() => Time.timeScale, value => Time.timeScale = value, 1, 0.7f).OnComplete(() =>
                 {
 
                     SoundManager.Instance.PlayBGMSound("Lobby");

@@ -12,6 +12,7 @@ https://gabriel0108.itch.io/timeorbit
 [![TimeOrbit](http://img.youtube.com/vi/B7PSusO3T-4/0.jpg)](https://youtu.be/B7PSusO3T-4?t=0s) 
 ## 팀원 소개
 ### 개발
-이승혁 김범주
+이승혁 메인시스템 개발, 서버 순위 시스템 개발
+김범주 UI 및 연출 개발
 ### 기획
 김건범

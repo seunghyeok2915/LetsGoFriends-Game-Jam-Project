@@ -17,16 +17,6 @@ public class UIManager : MonoBehaviour
         InfoView.SetActive(true);
     }
 
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            Time.timeScale = 0;
-            SoundManager.Instance.PauseBGM();
-            settingPanel.SetActive(true);
-        }
-    }
-
     public void Close()
     {
         if (GameManager.Instance.isStart)
@@ -39,6 +29,13 @@ public class UIManager : MonoBehaviour
         SoundManager.Instance.ResumeBGM();
         }
 
+    }
+
+    public void Setting()
+    {
+   Time.timeScale = 0;
+            SoundManager.Instance.PauseBGM();
+            settingPanel.SetActive(true);
     }
 
     IEnumerator TimeScale(int time)

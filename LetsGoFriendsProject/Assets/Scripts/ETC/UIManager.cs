@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,17 +24,17 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-        Time.timeScale = 1;
-        SoundManager.Instance.ResumeBGM();
+            Time.timeScale = 1;
+            SoundManager.Instance.ResumeBGM();
         }
 
     }
 
     public void Setting()
     {
-   Time.timeScale = 0;
-            SoundManager.Instance.PauseBGM();
-            settingPanel.SetActive(true);
+        Time.timeScale = 0;
+        SoundManager.Instance.PauseBGM();
+        settingPanel.SetActive(true);
     }
 
     IEnumerator TimeScale(int time)

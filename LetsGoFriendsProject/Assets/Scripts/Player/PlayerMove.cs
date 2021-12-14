@@ -1,13 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
     [Header("속도, 반지름")]
 
-    [SerializeField] [Range(0f, 10f)] public float speed = 1;
-    [SerializeField] [Range(0f, 10f)] public float radius = 1;
+    [SerializeField][Range(0f, 10f)] public float speed = 1;
+    [SerializeField][Range(0f, 10f)] public float radius = 1;
 
     private float runningTime = 0;
     private Vector2 newPos = new Vector2();

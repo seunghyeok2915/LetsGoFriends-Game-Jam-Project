@@ -1,11 +1,10 @@
+using Cinemachine;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using DG.Tweening;
-using Cinemachine;
-using UnityEngine.Rendering.PostProcessing;
-using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -55,6 +54,9 @@ public class GameManager : MonoBehaviour
     public Text timeName;
     public int sumScore;
 
+    public Button parryBtn;
+    public Button changeDirBtn;
+
     public AddRankPage addRankPage;
     public ShowRankPage showRankPage;
 
@@ -90,7 +92,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(this);
-        var pp = FindObjectOfType<PostProcessVolume>();
+        PostProcessVolume pp = FindObjectOfType<PostProcessVolume>();
         pp.profile.TryGetSettings<Vignette>(out vg);
         phaseTimeCache = phaseTime.ToList();
         highlightTimeCache = highlightTime.ToList();
@@ -106,12 +108,14 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-         player.GetComponent<LineRenderer>().enabled = true;
+        parryBtn.gameObject.SetActive(true);
+        changeDirBtn.gameObject.SetActive(true);
+        player.GetComponent<LineRenderer>().enabled = true;
         sheetEditor.enabled = true;
-        virtualCamera.transform.position = new Vector3(0,0,-10);
+        virtualCamera.transform.position = new Vector3(0, 0, -10);
         virtualCamera.m_Lens.OrthographicSize = 8.1f;
-         virtualCamera.Follow = null;
-          player.transform.GetComponent<PlayerInput>().enabled = true;
+        virtualCamera.Follow = null;
+        player.transform.GetComponent<PlayerInput>().enabled = true;
         player.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.yellow;
         timeText.gameObject.SetActive(true);
         scoreName.gameObject.SetActive(true);
@@ -156,7 +160,10 @@ public class GameManager : MonoBehaviour
 
         }
 
-        if (!isStart) return;
+        if (!isStart)
+        {
+            return;
+        }
 
         passTime += Time.deltaTime;
 
@@ -196,7 +203,11 @@ public class GameManager : MonoBehaviour
     public void PhaseUp()
     {
         phase++;
-        if (phase == 3) return;
+        if (phase == 3)
+        {
+            return;
+        }
+
         radius = playerMove.radius - 0.5f;
         DOTween.To(() => playerMove.radius, x => playerMove.radius = x, radius, 3f);
     }
@@ -354,14 +365,16 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        parryBtn.gameObject.SetActive(false);
+        changeDirBtn.gameObject.SetActive(false);
         sheetEditor.enabled = false;
-       player.GetComponent<LineRenderer>().enabled = false;
-         timeText.gameObject.SetActive(false);
+        player.GetComponent<LineRenderer>().enabled = false;
+        timeText.gameObject.SetActive(false);
         scoreText.gameObject.SetActive(false);
-         scoreName.gameObject.SetActive(false);
+        scoreName.gameObject.SetActive(false);
         timeName.gameObject.SetActive(false);
-        player.transform.GetChild(0).GetComponent<SpriteRenderer>().DOFade(0,2);
-        player.transform.GetComponent<LineRenderer>().material.DOFade(0,2);
+        player.transform.GetChild(0).GetComponent<SpriteRenderer>().DOFade(0, 2);
+        player.transform.GetComponent<LineRenderer>().material.DOFade(0, 2);
         player.transform.GetComponent<PlayerInput>().enabled = false;
 
         virtualCamera.Follow = player.transform;

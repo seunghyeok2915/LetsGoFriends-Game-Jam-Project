@@ -11,11 +11,6 @@ public class UIManager : MonoBehaviour
     public GameObject InfoView;
 
 
-    void Start()
-    {
-        InfoView.SetActive(true);
-    }
-
     public void Close()
     {
         if (GameManager.Instance.isStart)

@@ -22,6 +22,7 @@ public class RankDBManager : MonoBehaviour
     const string URL = "https://script.google.com/macros/s/AKfycbwYx9NbFbORwq7Du991IsdSe-uPAf_7iHX2RRNYaX6z9w5uFqZxbZbIklOIFH42SBy9/exec";
     public List<PlayerRankData> playerRankDatas;
 
+   
     public void AddRank(string name, int score)
     {
         if (name == "")

@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour
     public Text timeName;
     public int sumScore;
 
+    public Image stopImage;
+
   
 
     public AddRankPage addRankPage;
@@ -107,7 +109,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-     
+        stopImage.color = Color.white;
         player.GetComponent<LineRenderer>().enabled = true;
         sheetEditor.enabled = true;
         virtualCamera.transform.position = new Vector3(0, 0, -10);

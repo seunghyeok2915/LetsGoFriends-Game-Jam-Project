@@ -9,6 +9,8 @@ public class PlayerInput : MonoBehaviour
 
     public UnityEvent onClickMouseLeft = new UnityEvent();
 
+
+
     private void Awake()
     {
         if (playerMove == null)
@@ -37,23 +39,22 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    if (EventSystem.current.IsPointerOverGameObject())
-        //    {
-        //        onClickMouseLeft?.Invoke();
-        //    }
-        //}
+        if (!TitlePanel.isStart) return;
 
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    playerParry.OnSpaceBtn();
-        //}
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                onClickMouseLeft?.Invoke();
+            }
+        }
 
-        //if (Input.GetKeyUp(KeyCode.Space))
-        //{
-        //    playerParry.OnSpaceBtnUp();
-        //}
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            playerParry.OnSpaceBtn();
+        }
+
+ 
     }
 
     private void RegisterEvents()

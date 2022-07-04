@@ -54,8 +54,7 @@ public class GameManager : MonoBehaviour
     public Text timeName;
     public int sumScore;
 
-    public Button parryBtn;
-    public Button changeDirBtn;
+  
 
     public AddRankPage addRankPage;
     public ShowRankPage showRankPage;
@@ -108,15 +107,14 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        parryBtn.gameObject.SetActive(true);
-        changeDirBtn.gameObject.SetActive(true);
+     
         player.GetComponent<LineRenderer>().enabled = true;
         sheetEditor.enabled = true;
         virtualCamera.transform.position = new Vector3(0, 0, -10);
         virtualCamera.m_Lens.OrthographicSize = 8.1f;
         virtualCamera.Follow = null;
         player.transform.GetComponent<PlayerInput>().enabled = true;
-        player.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.yellow;
+        player.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
         timeText.gameObject.SetActive(true);
         scoreName.gameObject.SetActive(true);
         timeName.gameObject.SetActive(true);
@@ -365,8 +363,6 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        parryBtn.gameObject.SetActive(false);
-        changeDirBtn.gameObject.SetActive(false);
         sheetEditor.enabled = false;
         player.GetComponent<LineRenderer>().enabled = false;
         timeText.gameObject.SetActive(false);

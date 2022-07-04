@@ -90,10 +90,6 @@ public class PlayerParry : MonoBehaviour
 
     }
 
-    public void OnSpaceBtnUp()
-    {
-
-    }
 
     void CreatePoints()
     {

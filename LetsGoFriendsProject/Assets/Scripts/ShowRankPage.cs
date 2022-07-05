@@ -41,7 +41,7 @@ public class ShowRankPage : MonoBehaviour
 
         for (int i = 0; i < playerRankDatas.Count; i++)
         {
-            if (i >= 5)
+            if (i >= 10)
                 break;
             playerRankBoxes[i].SetBox(playerRankDatas[i]);
         }

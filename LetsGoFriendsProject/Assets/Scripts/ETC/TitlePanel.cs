@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 
 public class TitlePanel : MonoBehaviour
@@ -24,12 +25,19 @@ public class TitlePanel : MonoBehaviour
 
     public CanvasGroup group;
 
+    public Text pressTxt;
+
+    public GameObject panel;
+    public GameObject PostProcessing;
+
     void Start()
     {
         isStart = false;
         SoundManager.Instance.AdjustMasterVolume(1);
         SoundManager.Instance.AdjustFxVoulme(1);
         SoundManager.Instance.AdjustBGMVolume(1);
+
+        pressTxt.DOFade(0.5f, 1).SetLoops(-1 , LoopType.Yoyo);
     }
 
     private void Update()
@@ -73,10 +81,11 @@ public class TitlePanel : MonoBehaviour
         FindObjectOfType<DrawCircle>().ChangeColor();
         button.gameObject.SetActive(false);
         readyTxt.gameObject.SetActive(false);
-
+        panel.SetActive(true);
         group.DOFade(0, 1);
         //mainImage.rectTransform.DOAnchorPosY(-1240, 1);
         GameManager.Instance.StartGame();
+        PostProcessing.GetComponent<PostProcessVolume>().enabled = true;
     }
 
 }
